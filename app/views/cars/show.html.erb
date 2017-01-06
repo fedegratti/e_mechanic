@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @car.branch %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @car.model %>
+</p>
+
+<p>
+  <strong>Chassis number:</strong>
+  <%= @car.chassis_number %>
+</p>
+
+<p>
+  <strong>Engine number:</strong>
+  <%= @car.engine_number %>
+</p>
+
+<p>
+  <strong>Plate:</strong>
+  <%= @car.plate %>
+</p>
+
+<p>
+  <strong>Kilometers:</strong>
+  <%= @car.kilometers %>
+</p>
+
+<p>
+  <strong>Sell date:</strong>
+  <%= @car.sell_date %>
+</p>
+
+<%= link_to 'Edit', edit_car_path(@car) %> |
+<%= link_to 'Back', cars_path %>

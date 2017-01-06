@@ -1,0 +1,2 @@
+class Warranty < RepairOrder
+end

@@ -1,0 +1,32 @@
+<%= form_for(repair_order) do |f| %>
+  <% if repair_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(repair_order.errors.count, "error") %> prohibited this repair_order from being saved:</h2>
+
+      <ul>
+      <% repair_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :order_number %>
+    <%= f.number_field :order_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ajax %>
+    <%= f.check_box :ajax %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

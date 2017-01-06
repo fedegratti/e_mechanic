@@ -1,0 +1,22 @@
+<%= form_for(technical_report) do |f| %>
+  <% if technical_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(technical_report.errors.count, "error") %> prohibited this technical_report from being saved:</h2>
+
+      <ul>
+      <% technical_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :picture %>
+    <%= f.text_field :picture %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

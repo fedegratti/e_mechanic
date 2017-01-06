@@ -1,0 +1,22 @@
+<%= form_for(manual) do |f| %>
+  <% if manual.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(manual.errors.count, "error") %> prohibited this manual from being saved:</h2>
+
+      <ul>
+      <% manual.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :operation_number %>
+    <%= f.text_field :operation_number %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
