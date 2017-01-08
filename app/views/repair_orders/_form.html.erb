@@ -26,12 +26,12 @@
       <div class="form-group">
         <%= f.label t(:type), class: "col-sm-2 control-label" %>
         <div class="col-sm-10">
-          <select id="type_select" class="form-control">
-            <option value="campaign"><%= t('campaign') %></option>
-            <option value="warranty"><%= t('warranty') %></option>
-            <option value="maintenance"><%= t('maintenance') %></option>
-            <option value="repair"><%= t('repair') %></option>
-            <option value="service"><%= t('service') %></option>
+          <select id="type_select" name="repair_order[type]" class="form-control" required="true">
+            <option value="Campaign"><%= t('campaign') %></option>
+            <option value="Warranty"><%= t('warranty') %></option>
+            <option value="Maintenance"><%= t('maintenance') %></option>
+            <option value="Repair"><%= t('repair') %></option>
+            <option value="Service"><%= t('service') %></option>
           </select>
         </div>
       </div>
@@ -63,14 +63,14 @@
       <div id="claim_number" class="form-group">
         <%= f.label :claim_number, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
-          <%= f.number_field :claim_number, class:'form-control', required:true %>
+          <%= f.number_field :claim_number, class:'form-control' %>
         </div>
       </div>
 
       <div id="operation_number" class="form-group">
         <%= f.label :operation_number, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
-          <%= f.text_field :operation_number, class:'form-control', required:true %>
+          <%= f.text_field :operation_number, class:'form-control' %>
         </div>
       </div>
 
@@ -87,7 +87,7 @@
     toggleSelect(this);
   });
   function toggleSelect (selectEl) {
-    if ($(selectEl).val() == "campaign") {
+    if ($(selectEl).val() == "Campaign") {
       $('#claim_number').css('display', 'block');
       $('#operation_number').css('display', 'block');
     }

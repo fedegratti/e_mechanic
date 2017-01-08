@@ -15,8 +15,9 @@
 
       <thead>
         <tr>
-          <th><%= t('activerecord.attributes.repair_order.car_id') %></th>
           <th><%= t('activerecord.attributes.repair_order.order_number') %></th>
+          <th><%= t('activerecord.attributes.repair_order.car_id') %></th>
+          <th><%= t('activerecord.attributes.repair_order.type') %></th>
           <th><%= t('activerecord.attributes.repair_order.description') %></th>
           <th><%= t('activerecord.attributes.repair_order.in_ajax') %></th>
           <th><%= t('activerecord.attributes.repair_order.claim_number') %></th>
@@ -28,19 +29,20 @@
       <tbody>
         <% @repair_orders.each do |repair_order| %>
           <tr>
+            <td><%= repair_order.order_number %></td>
             <td>
             <% if repair_order.car? %>
               <a href="<%= car_path(repair_order.car) %>"><%= repair_order.car.name %></a>
             <% end %>
             </td>
-            <td><%= repair_order.order_number %></td>
+            <td><%= t(repair_order.type.downcase) %></td>
             <td><%= repair_order.description %></td>
             <td><%= repair_order.ajax ? t('yes') : t('no') %></td>
             <td><%= repair_order.claim_number %></td>
             <td><%= repair_order.operation_number %></td>
-            <td><%= link_to t('show'), repair_order %></td>
+            <td><%= link_to t('show'), repair_order_path(repair_order) %></td>
             <td><%= link_to t('edit'), edit_repair_order_path(repair_order) %></td>
-            <td><%= link_to t('destroy'), repair_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to t('destroy'), repair_order_path(repair_order), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>

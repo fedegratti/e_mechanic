@@ -7,6 +7,6 @@ class Car < ApplicationRecord
   alias_attribute :name,:model
 
   def name
-    "#{self.brand} #{self.model} (Cliente: #{self.client.name})"
+    "#{self.brand} #{self.model} (Chasis: #{self.chassis_number.upcase}, Cliente: #{self.client.name})"
   end
 end

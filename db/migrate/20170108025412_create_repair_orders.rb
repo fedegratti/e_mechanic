@@ -7,6 +7,7 @@ class CreateRepairOrders < ActiveRecord::Migration[5.0]
       t.boolean :ajax
       t.integer :claim_number
       t.string :operation_number
+      t.string :type
 
       t.timestamps
     end

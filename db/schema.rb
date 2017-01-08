@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170108025412) do
     t.boolean  "ajax"
     t.integer  "claim_number"
     t.string   "operation_number"
+    t.string   "type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["car_id"], name: "index_repair_orders_on_car_id"

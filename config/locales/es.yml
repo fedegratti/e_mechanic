@@ -43,6 +43,6 @@ es:
         in_ajax: "Está en ajax?"
         claim_number: "Número de reclamo"
         operation_number: "Número de operación"
-        submit: "asd"
+        type: "Tipo"
   date:
     order: "order"

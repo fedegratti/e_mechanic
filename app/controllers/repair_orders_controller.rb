@@ -29,7 +29,7 @@ class RepairOrdersController < ApplicationController
 
     respond_to do |format|
       if @repair_order.save
-        format.html { redirect_to @repair_order, notice: 'Repair order was successfully created.' }
+        format.html { redirect_to repair_order_path(@repair_order), notice: 'Repair order was successfully created.' }
         format.json { render :show, status: :created, location: @repair_order }
       else
         format.html { render :new }
@@ -74,6 +74,6 @@ class RepairOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repair_order_params
-      params.require(:repair_order).permit(:car_id, :order_number, :description, :ajax, :claim_number, :operation_number)
+      params.require(:repair_order).permit(:car_id, :order_number, :description, :ajax, :claim_number, :operation_number, :type)
     end
 end
