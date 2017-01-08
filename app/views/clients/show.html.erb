@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>City:</strong>
-  <%= @client.city %>
-</p>
-
-<p>
   <strong>First name:</strong>
   <%= @client.first_name %>
 </p>
@@ -23,6 +18,21 @@
 <p>
   <strong>Address:</strong>
   <%= @client.address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @client.city.name %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @client.city.state.name %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @client.city.state.country.name %>
 </p>
 
 <p>

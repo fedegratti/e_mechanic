@@ -6,9 +6,57 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
+        <div class="navbar <%= @side_color %> noMargin">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand fontJedi" href="/">Guillermo Fielitz</a>
+                <div class="app_version">v0.1.0</div>
+            </div>
+            <div class="navbar-collapse collapse navbar-warning-collapse">
+                <ul class="nav navbar-nav">
+                  <li>
+                    <%= link_to t('Clients'), clients_path %>
+                  </li>
+                  <li>
+                      <%= link_to t('Cars'), cars_path %>
+                  </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                    <% #if current_user != nil %>
+                        <h3 class="user_name">Hello</h3>
+                    <% #end %>
+
+                    </li>
+    <!--                 <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                            <% if I18n.locale == :es %>
+                            ES
+                            <% else %>
+                            EN
+                            <% end %>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <% if I18n.locale == :es %>
+                                <li><a href="javascript:selectLanguage('en')">EN</a></li>
+                            <% else %>
+                                <li><a href="javascript:selectLanguage('es')">ES</a></li>
+                            <% end %>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
     <%= yield %>
     <script>
         $(function() {
