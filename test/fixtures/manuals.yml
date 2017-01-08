@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  car: one
   operation_number: MyString
 
 two:
+  car: two
   operation_number: MyString

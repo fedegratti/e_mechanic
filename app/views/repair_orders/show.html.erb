@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Car:</strong>
+  <%= @repair_order.car %>
+</p>
+
+<p>
   <strong>Order number:</strong>
   <%= @repair_order.order_number %>
 </p>
@@ -13,6 +18,16 @@
 <p>
   <strong>Ajax:</strong>
   <%= @repair_order.ajax %>
+</p>
+
+<p>
+  <strong>Claim number:</strong>
+  <%= @repair_order.claim_number %>
+</p>
+
+<p>
+  <strong>Operation number:</strong>
+  <%= @repair_order.operation_number %>
 </p>
 
 <%= link_to 'Edit', edit_repair_order_path(@repair_order) %> |

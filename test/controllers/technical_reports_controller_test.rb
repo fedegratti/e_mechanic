@@ -17,7 +17,7 @@ class TechnicalReportsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create technical_report" do
     assert_difference('TechnicalReport.count') do
-      post technical_reports_url, params: { technical_report: { picture: @technical_report.picture } }
+      post technical_reports_url, params: { technical_report: { car_id: @technical_report.car_id, picture: @technical_report.picture } }
     end
 
     assert_redirected_to technical_report_url(TechnicalReport.last)
@@ -34,7 +34,7 @@ class TechnicalReportsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update technical_report" do
-    patch technical_report_url(@technical_report), params: { technical_report: { picture: @technical_report.picture } }
+    patch technical_report_url(@technical_report), params: { technical_report: { car_id: @technical_report.car_id, picture: @technical_report.picture } }
     assert_redirected_to technical_report_url(@technical_report)
   end
 

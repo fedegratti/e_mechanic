@@ -69,6 +69,6 @@ class RepairOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repair_order_params
-      params.require(:repair_order).permit(:order_number, :description, :ajax)
+      params.require(:repair_order).permit(:car_id, :order_number, :description, :ajax, :claim_number, :operation_number)
     end
 end

@@ -17,7 +17,7 @@ class ManualsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create manual" do
     assert_difference('Manual.count') do
-      post manuals_url, params: { manual: { operation_number: @manual.operation_number } }
+      post manuals_url, params: { manual: { car_id: @manual.car_id, operation_number: @manual.operation_number } }
     end
 
     assert_redirected_to manual_url(Manual.last)
@@ -34,7 +34,7 @@ class ManualsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update manual" do
-    patch manual_url(@manual), params: { manual: { operation_number: @manual.operation_number } }
+    patch manual_url(@manual), params: { manual: { car_id: @manual.car_id, operation_number: @manual.operation_number } }
     assert_redirected_to manual_url(@manual)
   end
 

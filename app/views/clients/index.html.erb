@@ -5,10 +5,12 @@
 <table>
   <thead>
     <tr>
+      <th>City</th>
       <th>First name</th>
       <th>Last name</th>
-      <th>Address</th>
       <th>Telephone</th>
+      <th>Address</th>
+      <th>Email</th>
       <th>Ci</th>
       <th>Ruc</th>
       <th colspan="3"></th>
@@ -18,10 +20,12 @@
   <tbody>
     <% @clients.each do |client| %>
       <tr>
+        <td><%= client.city %></td>
         <td><%= client.first_name %></td>
         <td><%= client.last_name %></td>
-        <td><%= client.address %></td>
         <td><%= client.telephone %></td>
+        <td><%= client.address %></td>
+        <td><%= client.email %></td>
         <td><%= client.ci %></td>
         <td><%= client.ruc %></td>
         <td><%= link_to 'Show', client %></td>

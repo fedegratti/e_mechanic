@@ -69,6 +69,6 @@ class TechnicalReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def technical_report_params
-      params.require(:technical_report).permit(:picture)
+      params.require(:technical_report).permit(:car_id, :picture)
     end
 end

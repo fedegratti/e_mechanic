@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :car_id %>
+    <%= f.text_field :car_id %>
+  </div>
+
+  <div class="field">
     <%= f.label :order_number %>
     <%= f.number_field :order_number %>
   </div>
@@ -24,6 +29,16 @@
   <div class="field">
     <%= f.label :ajax %>
     <%= f.check_box :ajax %>
+  </div>
+
+  <div class="field">
+    <%= f.label :claim_number %>
+    <%= f.number_field :claim_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :operation_number %>
+    <%= f.text_field :operation_number %>
   </div>
 
   <div class="actions">

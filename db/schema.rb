@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106224012) do
+ActiveRecord::Schema.define(version: 20170108025412) do
 
   create_table "cars", force: :cascade do |t|
     t.integer  "client_id"
@@ -39,8 +39,9 @@ ActiveRecord::Schema.define(version: 20170106224012) do
     t.integer  "city_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "address"
     t.integer  "telephone"
+    t.string   "address"
+    t.string   "email"
     t.integer  "ci"
     t.integer  "ruc"
     t.datetime "created_at", null: false
@@ -65,11 +66,10 @@ ActiveRecord::Schema.define(version: 20170106224012) do
   create_table "repair_orders", force: :cascade do |t|
     t.integer  "car_id"
     t.integer  "order_number"
+    t.string   "description"
+    t.boolean  "ajax"
     t.integer  "claim_number"
     t.string   "operation_number"
-    t.string   "description"
-    t.string   "type"
-    t.boolean  "ajax"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["car_id"], name: "index_repair_orders_on_car_id"

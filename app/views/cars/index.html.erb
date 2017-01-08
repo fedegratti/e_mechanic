@@ -5,7 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Branch</th>
+      <th>Client</th>
+      <th>Brand</th>
       <th>Model</th>
       <th>Chassis number</th>
       <th>Engine number</th>
@@ -19,7 +20,8 @@
   <tbody>
     <% @cars.each do |car| %>
       <tr>
-        <td><%= car.branch %></td>
+        <td><%= car.client %></td>
+        <td><%= car.brand %></td>
         <td><%= car.model %></td>
         <td><%= car.chassis_number %></td>
         <td><%= car.engine_number %></td>

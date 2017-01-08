@@ -5,9 +5,12 @@
 <table>
   <thead>
     <tr>
+      <th>Car</th>
       <th>Order number</th>
       <th>Description</th>
       <th>Ajax</th>
+      <th>Claim number</th>
+      <th>Operation number</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,9 +18,12 @@
   <tbody>
     <% @repair_orders.each do |repair_order| %>
       <tr>
+        <td><%= repair_order.car %></td>
         <td><%= repair_order.order_number %></td>
         <td><%= repair_order.description %></td>
         <td><%= repair_order.ajax %></td>
+        <td><%= repair_order.claim_number %></td>
+        <td><%= repair_order.operation_number %></td>
         <td><%= link_to 'Show', repair_order %></td>
         <td><%= link_to 'Edit', edit_repair_order_path(repair_order) %></td>
         <td><%= link_to 'Destroy', repair_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>

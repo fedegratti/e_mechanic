@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>State</th>
       <th>Name</th>
       <th>Zip code</th>
       <th colspan="3"></th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @cities.each do |city| %>
       <tr>
+        <td><%= city.state %></td>
         <td><%= city.name %></td>
         <td><%= city.zip_code %></td>
         <td><%= link_to 'Show', city %></td>

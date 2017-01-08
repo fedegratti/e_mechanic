@@ -1,17 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  city: one
   first_name: MyString
   last_name: MyString
-  address: MyString
   telephone: 1
+  address: MyString
+  email: MyString
   ci: 1
   ruc: 1
 
 two:
+  city: two
   first_name: MyString
   last_name: MyString
-  address: MyString
   telephone: 1
+  address: MyString
+  email: MyString
   ci: 1
   ruc: 1
