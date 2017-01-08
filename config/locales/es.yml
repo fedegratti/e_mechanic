@@ -1,0 +1,48 @@
+es:
+  #car: "Auto"
+  campaign: "Campaña"
+  client: "Cliente"
+  clients: "Clientes"
+  cars: "Autos"
+  manuals: "Manuales"
+  maintenance: "Mantenimiento"
+  technical_report: "Reportes técnicos"
+  cities: "Ciudades"
+  states: "Departamentos"
+  countries: "Países"
+  #order_number: "Número de orden"
+  #description: "Descripción"
+  #ajax: "Está en ajax?"
+  #claim_number: "Número de reclamo"
+  #operation_number: "Número de operación"
+  show: "Mostrar"
+  edit: "Editar"
+  destroy: "Eliminar"
+  repair_orders: "Órdenes de reparación"
+  new_repair_order: "Nueva Orden de reparación"
+  "yes": "si"
+  "no": "no"
+  hello: 'Hola'
+  repair: "Reparación"
+  service: "Service"
+  tu_vieja: ü, é, á, í, ó, ú, ñ, Ñ, ¿
+  type: "Tipo"
+  warranty: "Garantía"
+  helpers:
+    submit:
+      create: "Crear %{model}"
+  activerecord:
+    models:
+      repair_order: "Orden de reparación"
+    attributes:
+      repair_order:
+        car_id: "Auto"
+        order_number: "Número de orden"
+        description: "Descripción"
+        ajax: "Enviar a ajax?"
+        in_ajax: "Está en ajax?"
+        claim_number: "Número de reclamo"
+        operation_number: "Número de operación"
+        submit: "asd"
+  date:
+    order: "order"

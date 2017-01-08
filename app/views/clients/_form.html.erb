@@ -1,15 +1,13 @@
 <%= form_for(client, html: { class: "form-horizontal", role: "form"}) do |f| %>
   <% if client.errors.any? %>
-    <div id="error_explanation">
-      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
 
-      <ul>
-      <% client.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <ul>
+    <% client.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   <% end %>
 
 <div class="col-lg-6">
@@ -91,12 +89,10 @@
 <script type="text/javascript">
   var toggled = false;
   $('#type_select').change(function(){
-    console.log("asd");
     toggleSelect();
   });
   function toggleSelect () {
     if (toggled) {
-      console.log("asd2")
       $('#ci').css('display', 'block');
       $('#ruc').css('display', 'none');
     }

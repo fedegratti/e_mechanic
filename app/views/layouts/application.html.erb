@@ -23,17 +23,35 @@
             <div class="navbar-collapse collapse navbar-warning-collapse">
                 <ul class="nav navbar-nav">
                   <li>
-                    <%= link_to t('Clients'), clients_path %>
+                    <%= link_to t('repair_orders'), repair_orders_path %>
                   </li>
                   <li>
-                      <%= link_to t('Cars'), cars_path %>
+                    <%= link_to t('clients'), clients_path %>
+                  </li>
+                  <li>
+                    <%= link_to t('cars'), cars_path %>
+                  </li>
+                  <li>
+                    <%= link_to t('manuals'), manuals_path %>
+                  </li>
+                  <li>
+                    <%= link_to t('technical_report'), technical_reports_path %>
+                  </li>
+                  <li>
+                    <%= link_to t('cities'), cities_path %>
+                  </li>
+                  <li>
+                    <%= link_to t('states'), states_path %>
+                  </li>
+                  <li>
+                    <%= link_to t('countries'), countries_path %>
                   </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                     <% #if current_user != nil %>
-                        <h3 class="user_name">Hello</h3>
+                        <h3 class="user_name"><%= t('hello') %> Guille</h3>
                     <% #end %>
 
                     </li>

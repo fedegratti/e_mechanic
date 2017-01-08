@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_cities, only: [:new, :edit]
 
   # GET /clients
   # GET /clients.json
@@ -15,7 +16,7 @@ class ClientsController < ApplicationController
   # GET /clients/new
   def new
     @client = Client.new
-    @cities = City.all.pluck(:name, :id)
+
   end
 
   # GET /clients/1/edit
@@ -66,6 +67,10 @@ class ClientsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def set_cities
+      @cities = City.all.pluck(:name, :id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

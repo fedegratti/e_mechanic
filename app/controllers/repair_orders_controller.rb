@@ -1,5 +1,6 @@
 class RepairOrdersController < ApplicationController
   before_action :set_repair_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_cars, only: [:new, :edit]
 
   # GET /repair_orders
   # GET /repair_orders.json
@@ -65,6 +66,10 @@ class RepairOrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_repair_order
       @repair_order = RepairOrder.find(params[:id])
+    end
+
+    def set_cars
+      @cars = Car.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
