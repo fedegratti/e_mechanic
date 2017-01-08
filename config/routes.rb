@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :countries
+  resources :states
+  resources :cities
   resources :repair_orders
   resources :manuals
   resources :technical_reports

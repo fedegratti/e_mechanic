@@ -6,7 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-@client_1 = Client.create(first_name: 'Fede',last_name: 'Gratti',address: '3 y 65 1328',telephone: 12345678,ci: '23345567')
+@country_1 = Country.create(name: 'Uruguay')
+@state_1 = State.create(country_id: @country_1.id, name: 'Colonia')
+@city_1 = City.create(state_id: @state_1.id, name: 'Carmelo')
+
+@client_1 = Client.create(city_id: @city_1.id, first_name: 'Fede',last_name: 'Gratti',address: '3 y 65 1328',telephone: 12345678,ci: '23345567')
 
 @car_1 = Car.create(client_id: @client_1.id,brand: 'Ford',model: 'Mustang', chassis_number: 'gp2312389yhd', engine_number: 'asd13123ads', plate: '123asd23', kilometers: '9999990', sell_date: Date.new)
 

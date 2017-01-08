@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106155215) do
+ActiveRecord::Schema.define(version: 20170106224012) do
 
   create_table "cars", force: :cascade do |t|
     t.integer  "client_id"
@@ -26,13 +26,30 @@ ActiveRecord::Schema.define(version: 20170106155215) do
     t.index ["client_id"], name: "index_cars_on_client_id"
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.integer  "state_id"
+    t.string   "name"
+    t.string   "zip_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_cities_on_state_id"
+  end
+
   create_table "clients", force: :cascade do |t|
+    t.integer  "city_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"
     t.integer  "telephone"
     t.integer  "ci"
     t.integer  "ruc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_clients_on_city_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,6 +73,14 @@ ActiveRecord::Schema.define(version: 20170106155215) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["car_id"], name: "index_repair_orders_on_car_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.integer  "country_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_states_on_country_id"
   end
 
   create_table "technical_reports", force: :cascade do |t|
