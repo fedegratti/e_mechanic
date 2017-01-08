@@ -1,24 +1,28 @@
 ​Generators:
-Client:
-rails generate scaffold client first_name:string last_name:string telephone:integer ci:integer ruc:integer
-
-Car:
-rails generate scaffold car brand:string model:string chassis_number:string engine_number:string plate:string kilometers:integer sell_date:date
-
-Technical report:
-rails generate scaffold technical_report picture:string
-
-Manual:
-rails generate scaffold manual operation_number:string
-
-Repair order:
-rails generate scaffold repair_order order_number:integer description:string ajax:boolean
-
-City:
-rails generate scaffold city name:string zip_code:string
-
-State:
-rails generate scaffold state name:string
-
 Country:
 rails generate scaffold country name:string
+
+State:
+rails generate scaffold state country:references name:string
+
+City:
+rails generate scaffold city state:references name:string zip_code:string
+
+Client:
+rails generate scaffold client city:references first_name:string last_name:string telephone:integer ci:integer ruc:integer
+
+Car:
+rails generate scaffold car client:references brand:string model:string chassis_number:string engine_number:string plate:string kilometers:integer sell_date:date
+
+Technical report:
+rails generate scaffold technical_report car:references picture:string
+
+Manual:
+rails generate scaffold manual car:references operation_number:string
+
+Repair order:
+rails generate scaffold repair_order car:references order_number:integer description:string ajax:boolean
+
+
+
+
