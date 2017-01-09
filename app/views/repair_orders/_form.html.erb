@@ -16,6 +16,8 @@
   <div class="well bs-component">
     <form class="form-horizontal">
 
+      <%= f.hidden_field :car_id %>
+
       <div class="form-group">
         <%= f.label :order_number, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
@@ -37,12 +39,34 @@
       </div>
 
       <div class="form-group">
+        <%= f.label t(:search_car), class:'col-lg-2 control-label'  %>
+        <div class="col-lg-4 search-car-toggle">
+          <div class="togglebutton">
+            <label>
+              <%= t('by_ci') %> &nbsp; &nbsp;<input type="checkbox" checked> <%= t('by_chassis_number') %>
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <%= f.text_field :car_chassis_number, class:'form-control', data: { autocomplete_source: '/chassis_numbers'} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :car, class:'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+          <div id="car_info"></div>
+        </div>
+      </div>
+
+      <!--
+      <div class="form-group">
         <%= f.label :car_id, class:'col-lg-2 control-label'  %>
         <div class="col-lg-10">
-
           <%= f.collection_select(:car_id, @cars, :id, :name,{},{ class: "form-control", required: true }) %>
         </div>
       </div>
+      -->
 
       <div class="form-group">
         <%= f.label :description, class:'col-lg-2 control-label' %>
@@ -83,6 +107,18 @@
   </div>
 </div>
 <script type="text/javascript">
+  $('#repair_order_car_chassis_number').on('change input focusin focusout',function(){
+      console.log($(this).val().length)
+    if ($(this).val().length == 17)
+    {
+      $.get('/get_by_chassis_number/'+$(this).val(),function(data){
+        console.log(data[0])
+        var car = data[0];
+        $('#car_info').html(car.brand + ' ' + car.model + ' (Matr&iacute;cula: '+ car.plate +')');
+        $('#repair_order_car_id').val(car.id);
+      });
+    }
+  })
   $('#type_select').change(function(){
     toggleSelect(this);
   });

@@ -1,5 +1,8 @@
 es:
   #car: "Auto"
+  back: "Volver"
+  by_ci: "Por CI"
+  by_chassis_number: "Por número de chasis"
   campaign: "Campaña"
   client: "Cliente"
   clients: "Clientes"
@@ -24,6 +27,7 @@ es:
   "no": "no"
   hello: 'Hola'
   repair: "Reparación"
+  search_car: "Buscar auto"
   service: "Service"
   tu_vieja: ü, é, á, í, ó, ú, ñ, Ñ, ¿
   type: "Tipo"

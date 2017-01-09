@@ -61,6 +61,18 @@ class CarsController < ApplicationController
     end
   end
 
+  # GET /car_by_chassis_number/1
+  def get_by_chassis_number
+    @car = Car.where("chassis_number = ?", "#{params[:chassis_number]}")
+    render json: @car
+  end
+
+  # GET /get_chassis_numbers/1
+  def get_chassis_numbers
+    @chassis_numbers = Car.order(:chassis_number).where("chassis_number like ?", "%#{params[:term]}%")
+    render json: @chassis_numbers.map(&:chassis_number)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car
