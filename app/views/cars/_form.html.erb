@@ -1,57 +1,87 @@
-<%= form_for(car) do |f| %>
+<%= form_for(car, html: { class: "form-horizontal", role: "form"}) do |f| %>
   <% if car.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
 
-      <ul>
-      <% car.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <ul>
+    <% car.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   <% end %>
 
-  <div class="field">
-    <%= f.label :client_id %>
-    <%= f.text_field :client_id %>
-  </div>
+<div class="col-lg-6">
+  <div class="well bs-component">
 
-  <div class="field">
-    <%= f.label :brand %>
-    <%= f.text_field :brand %>
-  </div>
+    <div class="form-group">
+      <%= f.label t(:chassis_number), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :chassis_number, class:'form-control', required: true %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :model %>
-    <%= f.text_field :model %>
-  </div>
+    <% @options = [] %>
+    <% @clients.each do |client| %>
+      <% @option = [] %>
+      <% @option << client.first_name + ' ' + client.last_name %>
+      <% @option << client.id.to_s %>
+      <% @options << @option %>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :chassis_number %>
-    <%= f.text_field :chassis_number %>
-  </div>
+    <div class="form-group">
+      <%= f.label t(:client), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.select :client_id, @options, {}, { class:'form-control', required: true } %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :engine_number %>
-    <%= f.text_field :engine_number %>
-  </div>
+    <div class="form-group">
+      <%= f.label t(:brand), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :brand, class:'form-control' %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :plate %>
-    <%= f.text_field :plate %>
-  </div>
+    <div class="form-group">
+      <%= f.label t(:model), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :model, class:'form-control' %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :kilometers %>
-    <%= f.number_field :kilometers %>
-  </div>
+    <div class="form-group">
+      <%= f.label t(:engine_number), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :engine_number, class:'form-control' %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :sell_date %>
-    <%= f.date_select :sell_date %>
-  </div>
+    <div class="form-group">
+      <%= f.label t(:plate), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :plate, class:'form-control' %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit %>
+    <div class="form-group">
+      <%= f.label t(:kilometers), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.number_field :kilometers, class:'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t(:sell_date), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.date_select :sell_date, {use_month_names: [t(:jan), t(:feb), t(:mar), t(:apr), t(:may), t(:jun), t(:jul), t(:aug), t(:sep), t(:oct), t(:nov), t(:dec)],start_year: 1970, class:'form-control' } %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
+</div>
 <% end %>

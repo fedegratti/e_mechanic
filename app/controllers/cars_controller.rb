@@ -1,5 +1,6 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
+  before_action :set_clients, only: [:new, :edit]
 
   # GET /cars
   # GET /cars.json
@@ -61,11 +62,22 @@ class CarsController < ApplicationController
     end
   end
 
-  # GET /car_by_chassis_number/1
+  # GET /get_car_by_chassis_number/1
   def get_by_chassis_number
     @car = Car.where("chassis_number = ?", "#{params[:chassis_number]}")
     render json: @car
   end
+
+  # GET /get_car_by_client_identification/1
+  def get_by_client_identification
+    @client = Client.where("identification = ?", "#{params[:identification]}").first
+
+    @car = 'not found'
+    @car = @client.cars unless @client.nil?
+
+    render json: @car
+  end
+
 
   # GET /get_chassis_numbers/1
   def get_chassis_numbers
@@ -77,6 +89,10 @@ class CarsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_car
       @car = Car.find(params[:id])
+    end
+
+    def set_clients
+      @clients = Client.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
