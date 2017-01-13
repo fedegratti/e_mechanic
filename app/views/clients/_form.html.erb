@@ -14,68 +14,61 @@
   <div class="well bs-component">
 
     <div class="form-group">
-      <%= f.label :first_name, class: "col-sm-2 control-label" %>
+      <%= f.label t(:ci_or_ruc), class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :identification, class:'form-control', required: true %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t(:first_name), class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.text_field :first_name, class:'form-control' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :last_name, class: "col-sm-2 control-label" %>
+      <%= f.label t(:last_name), class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.text_field :last_name, class:'form-control' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :telephone, class: "col-sm-2 control-label" %>
+      <%= f.label t(:telephone), class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.number_field :telephone, class:'form-control' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :address, class: "col-sm-2 control-label" %>
+      <%= f.label t(:address), class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.text_field :address, class:'form-control' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :city_id, class:'col-lg-2 control-label'  %>
+      <%= f.label t(:city), class:'col-lg-2 control-label'  %>
       <div class="col-lg-10">
         <%= f.select :city_id, @cities, {}, { class: "form-control", required: true } %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :email, class: "col-sm-2 control-label" %>
+      <%= f.label t(:email), class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.text_field :email, class:'form-control' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :type, class: "col-sm-2 control-label" %>
+      <%= f.label t(:type), class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
-        <select id="type_select" class="form-control">
-          <option value="#ci">Person</option>
-          <option value="#ruc">Company</option>
+        <select id="type_select" name="client[type]" class="form-control" required="true">
+          <option value="Person"><%= t('person') %></option>
+          <option value="Company"><%= t('company') %></option>
         </select>
-      </div>
-    </div>
-
-    <div id="ci" class="form-group">
-      <%= f.label :ci, class: "col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.number_field :ci, class:'form-control' %>
-      </div>
-    </div>
-
-    <div id="ruc" class="form-group" style="display:none;">
-      <%= f.label :ruc, class: "col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.number_field :ruc, class:'form-control' %>
       </div>
     </div>
 
@@ -86,21 +79,4 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  var toggled = false;
-  $('#type_select').change(function(){
-    toggleSelect();
-  });
-  function toggleSelect () {
-    if (toggled) {
-      $('#ci').css('display', 'block');
-      $('#ruc').css('display', 'none');
-    }
-    else {
-      $('#ruc').css('display', 'block');
-      $('#ci').css('display', 'none');
-    }
-    toggled = !toggled;
-  }
-</script>
 <% end %>

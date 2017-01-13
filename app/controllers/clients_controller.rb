@@ -63,6 +63,12 @@ class ClientsController < ApplicationController
     end
   end
 
+  # GET /get_cis/1
+  def get_cis
+    @cis = Client.order(:identification).where("identification like ?", "%#{params[:term]}%")
+    render json: @cis.map(&:identification)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
@@ -75,6 +81,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:city_id, :first_name, :last_name, :telephone, :address, :email, :ci, :ruc)
+      params.require(:client).permit(:city_id, :first_name, :last_name, :telephone, :address, :email, :identification, :type)
     end
 end
