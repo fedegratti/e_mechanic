@@ -1,6 +1,6 @@
 class RepairOrdersController < ApplicationController
   before_action :set_repair_order, only: [:show, :edit, :update, :destroy]
-  before_action :set_cars, only: [:new, :edit]
+  before_action :set_last_repair_order_id, only: [:new, :edit]
 
   # GET /repair_orders
   # GET /repair_orders.json
@@ -43,7 +43,7 @@ class RepairOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @repair_order.update(repair_order_params)
-        format.html { redirect_to @repair_order, notice: 'Repair order was successfully updated.' }
+        format.html { redirect_to repair_order_path(@repair_order), notice: 'Repair order was successfully updated.' }
         format.json { render :show, status: :ok, location: @repair_order }
       else
         format.html { render :edit }
@@ -70,6 +70,10 @@ class RepairOrdersController < ApplicationController
 
     def set_cars
       @cars = Car.all
+    end
+
+    def set_last_repair_order_id
+      @last_repair_order_id = RepairOrder.last.order_number
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

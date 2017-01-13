@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20170108025412) do
     t.integer  "telephone"
     t.string   "address"
     t.string   "email"
-    t.integer  "ci"
-    t.integer  "ruc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "identification"
+    t.string   "type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["city_id"], name: "index_clients_on_city_id"
   end
 

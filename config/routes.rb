@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   root 'repair_orders#index'
 
   get '/chassis_numbers' => 'cars#get_chassis_numbers'
-  get '/get_by_chassis_number/:chassis_number' => 'cars#get_by_chassis_number'
+  get '/cis' => 'clients#get_cis'
+  get '/get_car_by_chassis_number/:chassis_number' => 'cars#get_by_chassis_number'
+  get '/get_car_by_client_identification/:identification' => 'cars#get_by_client_identification'
 end

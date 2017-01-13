@@ -9,7 +9,7 @@ City:
 rails generate scaffold city state:references name:string zip_code:string
 
 Client:
-rails generate scaffold client city:references first_name:string last_name:string telephone:integer address:string email:string ci:integer ruc:integer
+rails generate scaffold client city:references first_name:string last_name:string telephone:integer address:string email:string type:string identification:string
 
 Car:
 rails generate scaffold car client:references brand:string model:string chassis_number:string engine_number:string plate:string kilometers:integer sell_date:date

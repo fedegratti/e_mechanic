@@ -7,8 +7,8 @@ class CreateClients < ActiveRecord::Migration[5.0]
       t.integer :telephone
       t.string :address
       t.string :email
-      t.integer :ci
-      t.integer :ruc
+      t.string :identification
+      t.string :type
 
       t.timestamps
     end
