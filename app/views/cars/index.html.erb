@@ -15,13 +15,12 @@
 
       <thead>
         <tr>
-          <th><%= t('activerecord.attributes.car.client') %></th>
           <th><%= t('activerecord.attributes.car.brand') %></th>
           <th><%= t('activerecord.attributes.car.model') %></th>
           <th><%= t('activerecord.attributes.car.chassis_number') %></th>
+          <th><%= t('activerecord.attributes.car.client') %></th>
           <th><%= t('activerecord.attributes.car.engine_number') %></th>
           <th><%= t('activerecord.attributes.car.plate') %></th>
-          <th><%= t('activerecord.attributes.car.kilometers') %></th>
           <th><%= t('activerecord.attributes.car.sell_date') %></th>
           <th colspan="3"></th>
         </tr>
@@ -30,13 +29,13 @@
       <tbody>
         <% @cars.each do |car| %>
           <tr>
-            <td><a href="<%= client_path(car.client) %>"><%= car.client.name %></a></td>
             <td><%= car.brand %></td>
             <td><%= car.model %></td>
             <td><%= car.chassis_number %></td>
+            <td><a href="<%= client_path(car.client) %>"><%= car.client.name %></a></td>
             <td><%= car.engine_number %></td>
             <td><%= car.plate %></td>
-            <td><%= car.kilometers %></td>
+
             <td><%= car.sell_date %></td>
             <td><%= link_to t('show'), car %></td>
             <td><%= link_to t('edit'), edit_car_path(car) %></td>

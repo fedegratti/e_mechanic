@@ -5,4 +5,15 @@ class Client < ApplicationRecord
   def name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def self.get_by_identification identification
+    @client = self.where("identification = ?", "#{identification}")
+    @client.first
+  end
+
+
+  def self.get_by_name first_name, last_name
+    @client = self.where("first_name like ? and last_name like ?", "%#{first_name}%", "%#{last_name}%")
+    @client.first
+  end
 end

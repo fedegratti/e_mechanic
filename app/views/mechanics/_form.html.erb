@@ -1,0 +1,52 @@
+<%= form_for(mechanic) do |f| %>
+  <% if mechanic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mechanic.errors.count, "error") %> prohibited this mechanic from being saved:</h2>
+
+      <ul>
+      <% mechanic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :city_id %>
+    <%= f.text_field :city_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telephone %>
+    <%= f.number_field :telephone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :identification %>
+    <%= f.text_field :identification %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

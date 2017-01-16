@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108025412) do
+ActiveRecord::Schema.define(version: 20170114165458) do
 
   create_table "cars", force: :cascade do |t|
     t.integer  "client_id"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20170108025412) do
     t.string   "chassis_number"
     t.string   "engine_number"
     t.string   "plate"
-    t.integer  "kilometers"
     t.date     "sell_date"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -63,17 +62,36 @@ ActiveRecord::Schema.define(version: 20170108025412) do
     t.index ["car_id"], name: "index_manuals_on_car_id"
   end
 
+  create_table "mechanics", force: :cascade do |t|
+    t.integer  "city_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "telephone"
+    t.string   "address"
+    t.string   "email"
+    t.string   "identification"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["city_id"], name: "index_mechanics_on_city_id"
+  end
+
   create_table "repair_orders", force: :cascade do |t|
     t.integer  "car_id"
+    t.integer  "mechanic_id"
     t.integer  "order_number"
     t.string   "description"
+    t.string   "note"
     t.boolean  "ajax"
     t.integer  "claim_number"
     t.string   "operation_number"
     t.string   "type"
+    t.integer  "kilometers"
+    t.date     "repair_date"
+    t.date     "compliance_date"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["car_id"], name: "index_repair_orders_on_car_id"
+    t.index ["mechanic_id"], name: "index_repair_orders_on_mechanic_id"
   end
 
   create_table "states", force: :cascade do |t|

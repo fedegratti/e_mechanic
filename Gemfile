@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 gem 'bootstrap-material-design'
 gem 'jquery-ui-rails'
+gem 'roo-xls'
+gem 'figaro'

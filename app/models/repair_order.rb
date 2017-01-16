@@ -1,5 +1,6 @@
 class RepairOrder < ApplicationRecord
   belongs_to :car
+  belongs_to :mechanic
 
   def car?
     self.car != nil
@@ -23,5 +24,10 @@ class RepairOrder < ApplicationRecord
 
   def car_select
     "car_select"
+  end
+
+  def self.get_by_order_number order_number
+    @repair_order = self.where("order_number = ?", "#{order_number}")
+    @repair_order.first
   end
 end

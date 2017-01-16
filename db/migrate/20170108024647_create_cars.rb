@@ -7,7 +7,6 @@ class CreateCars < ActiveRecord::Migration[5.0]
       t.string :chassis_number
       t.string :engine_number
       t.string :plate
-      t.integer :kilometers
       t.date :sell_date
 
       t.timestamps

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>City:</strong>
+  <%= @mechanic.city %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @mechanic.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @mechanic.last_name %>
+</p>
+
+<p>
+  <strong>Telephone:</strong>
+  <%= @mechanic.telephone %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @mechanic.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @mechanic.email %>
+</p>
+
+<p>
+  <strong>Identification:</strong>
+  <%= @mechanic.identification %>
+</p>
+
+<%= link_to 'Edit', edit_mechanic_path(@mechanic) %> |
+<%= link_to 'Back', mechanics_path %>
