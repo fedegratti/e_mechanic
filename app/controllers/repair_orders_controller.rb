@@ -4,14 +4,13 @@ class RepairOrdersController < ApplicationController
   before_action :set_mechanics, only: [:new, :edit]
 
 #'MA3FC31S6FA744592'
-  def send_to_ayax
+  def send_to_ayax data
     cookie = get_ayax_cookie
 
     #data = "tipo=4&kms=34725&tiporep=Motor&descrep=descripcion&nroord=8888&obs=observacion&fecing=16%2F01%2F2017&tecnico=tecnico&agregar=Agregar"
     #data_example = "tipo=4&kms=34725&tipomant=Mantenimiento+35000+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++&descrep=CAMBIO+DE+ACEITE+Y+FILTRO&nroord=7266&obs=&fecing=09%2F01%2F2017&tecnico=FERNANDO&agregar=Agregar"
 
     path = '/grabarHistorial.php'
-    data = "tipo=4&kms=30086&tipomant=Mantenimiento+30000+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++&descrep=CAMBIO+DE+ACEITE+Y+FILTRO%2C+Y+CAMBIO+DE+FILTRO+DE+NAFTA&nroord=7267&obs=&fecing=09%2F01%2F2017&tecnico=FERNANDO&agregar=Agregar"
 
     headers = {
       "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -19,7 +18,7 @@ class RepairOrdersController < ApplicationController
       "Accept-Language" => "en-US,en;q=0.8",
       "Cache-Control" => "max-age=0",
       "Connection" => "keep-alive",
-      "Content-Length" => "263",
+      "Content-Length" => data.length.to_s,
       "Content-Type" => "application/x-www-form-urlencoded",
       "Cookie" => cookie,
       "Host" => "www.dat-ayax.com",
@@ -33,7 +32,7 @@ class RepairOrdersController < ApplicationController
 
     res = http.post(path, data, headers)
 
-    render json: { res: res }
+    res
   end
 
   def import_from_ayax
@@ -178,6 +177,56 @@ class RepairOrdersController < ApplicationController
 
     respond_to do |format|
       if @repair_order.save
+        if @repair_order.ayax
+
+          type_association = Hash.new
+          #type_association['Warranty'] = ''
+          type_association['Campaign'] = '1'
+          type_association['Repair'] = '2'
+          type_association['Service'] = '4'
+
+          if @repair_order.order_type == "Service"
+            data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
+                                       "kms" => @repair_order.kilometers,
+                                       "tipomant" => @repair_order.ayax_service_type,
+                                       "descrep" => @repair_order.description,
+                                       "nroord" => @repair_order.order_number,
+                                       "obs" => @repair_order.note,
+                                       "fecing" => @repair_order.repair_date.strftime("%d/%m/%Y"),
+                                       "tecnico" => @repair_order.mechanic.first_name,
+                                       "agregar" => "Agregar")
+          elsif @repair_order.order_type == "Repair"
+            data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
+                                       "kms" => @repair_order.kilometers,
+                                       "tiporep" => @repair_order.ayax_repair_type,
+                                       "descrep" => @repair_order.description,
+                                       "nroord" => @repair_order.order_number,
+                                       "obs" => @repair_order.note,
+                                       "fecing" => @repair_order.repair_date.strftime("%d/%m/%Y"),
+                                       "tecnico" => @repair_order.mechanic.first_name,
+                                       "agregar" => "Agregar")
+          elsif @repair_order.order_type == "Campaign"
+            data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
+                                       "kms" => @repair_order.kilometers,
+                                       "obs" => @repair_order.note,
+                                       "feccump" => @repair_order.compliance_date.strftime("%d/%m/%Y"),
+                                       "tecnico" => @repair_order.mechanic.first_name,
+                                       "agregar" => "Agregar")
+          end
+
+          puts data
+          puts data.length
+          res = send_to_ayax data
+          if res.code == 200
+            if res.body.include? "Existen datos que no han sido validados"
+              @repair_order.ayax = false
+            end
+          elsif res.code != 200
+            @repair_order.ayax = false
+          end
+
+          @repair_order.save
+        end
         format.html { redirect_to repair_order_path(@repair_order), notice: 'Repair order was successfully created.' }
         format.json { render :show, status: :created, location: @repair_order }
       else
@@ -300,6 +349,6 @@ class RepairOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repair_order_params
-      params.require(:repair_order).permit(:car_id, :mechanic_id, :order_number, :description, :ayax, :claim_number, :operation_number, :order_type, :kilometers, :repair_date, :compliance_date, :note)
+      params.require(:repair_order).permit(:car_id, :mechanic_id, :order_number, :description, :ayax, :claim_number, :operation_number, :order_type, :kilometers, :repair_date, :compliance_date, :note, :ayax_repair_type, :ayax_service_type)
     end
 end

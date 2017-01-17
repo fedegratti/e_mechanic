@@ -16,7 +16,7 @@
   <div class="well bs-component">
     <form class="form-horizontal">
 
-      <div class="form-group">
+      <div id="order_number_el" class="form-group">
         <%= f.label :order_number, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
           <%= f.number_field :order_number, class:'form-control', required:true, value: (repair_order.order_number.nil? ? @last_repair_order_id + 1 : repair_order.order_number) %>
@@ -32,10 +32,66 @@
         ], 4
       ) %>
 
-      <div class="form-group">
+      <div id="order_type_select" class="form-group">
         <%= f.label t(:type), class: "col-sm-2 control-label" %>
          <div class="col-sm-10">
           <%= f.select :order_type, @options, {}, { id: 'type_select', class:'form-control', required: true } %>
+        </div>
+      </div>
+
+      <% @options_service = options_for_select(
+        [
+          [t('Mantenimiento 1000                                                                                  '), "Mantenimiento 1000                                                                                  "],
+          [t('Mantenimiento 5000                                                                                  '), "Mantenimiento 5000                                                                                  "],
+          [t('Mantenimiento 10000                                                                                  '), "Mantenimiento 10000                                                                                  "],
+          [t('Mantenimiento 15000                                                                                  '), "Mantenimiento 15000                                                                                  "],
+          [t('Mantenimiento 20000                                                                                  '), "Mantenimiento 20000                                                                                  "],
+          [t('Mantenimiento 25000                                                                                  '), "Mantenimiento 25000                                                                                  "],
+          [t('Mantenimiento 30000                                                                                  '), "Mantenimiento 30000                                                                                  "],
+          [t('Mantenimiento 35000                                                                                  '), "Mantenimiento 35000                                                                                  "],
+          [t('Mantenimiento 40000                                                                                  '), "Mantenimiento 40000                                                                                  "],
+          [t('Mantenimiento 45000                                                                                  '), "Mantenimiento 45000                                                                                  "],
+          [t('Mantenimiento 50000                                                                                  '), "Mantenimiento 50000                                                                                  "],
+          [t('Mantenimiento 55000                                                                                  '), "Mantenimiento 55000                                                                                  "],
+          [t('Mantenimiento 60000                                                                                  '), "Mantenimiento 60000                                                                                  "],
+          [t('Mantenimiento 65000                                                                                  '), "Mantenimiento 65000                                                                                  "],
+          [t('Mantenimiento 70000                                                                                  '), "Mantenimiento 70000                                                                                  "],
+          [t('Mantenimiento 75000                                                                                  '), "Mantenimiento 75000                                                                                  "],
+          [t('Mantenimiento 80000                                                                                  '), "Mantenimiento 80000                                                                                  "],
+          [t('Mantenimiento 85000                                                                                  '), "Mantenimiento 85000                                                                                  "],
+          [t('Mantenimiento 90000                                                                                  '), "Mantenimiento 90000                                                                                  "],
+          [t('Mantenimiento 95000                                                                                  '), "Mantenimiento 95000                                                                                  "],
+          [t('Mantenimiento 100000                                                                                 '), "Mantenimiento 100000                                                                                 "],
+          [t('Mayores de 100000 (equivalentes a 5000 kms)                                                         '), "Mayores de 100000 (equivalentes a 5000 kms)                                                         "],
+          [t('Mayores 100000 kims  ( equivalentes a 10000 kms )                                                   '), "Mayores a 100000 kims ( equivalentes a 10000 kms )                                                  "],
+          [t('Mayores a 100000 kms (equivalentes a 20000 kms)                                                     '), "Mayores a 100000 kms ( equivalentes a 20000 kms )                                                  "],
+          [t('Mayores a 100000 kms ( equivalentes a 40000 kms)                                                    '), "Mayores a 100000 kms ( equivalentes a 40000 kms )                                                  "],
+
+        ], 25
+      ) %>
+
+      <% @options_repair = options_for_select(
+        [
+          [t('Motor'), "Motor"],
+          [t('Transmision Y Embrague'), "Transmision Y Embrague"],
+          [t('Ejes y Direccion'), "Ejes y Direccion"],
+          [t('Frenos'), "Frenos"],
+          [t('Carroceria'), "Carroceria"],
+          [t('Electricidad'), "Electricidad"]
+        ], 6
+      ) %>
+
+      <div id="service_type_select" class="form-group" style="display: none;">
+        <%= f.label t(:service_type), class: "col-sm-2 control-label" %>
+         <div class="col-sm-10">
+          <%= f.select :ayax_service_type, @options_service, {}, { class:'form-control' } %>
+        </div>
+      </div>
+
+      <div id="repair_type_select" class="form-group" style="display: none;">
+        <%= f.label t(:repair_type), class: "col-sm-2 control-label" %>
+         <div class="col-sm-10">
+          <%= f.select :ayax_repair_type, @options_repair, {}, { class:'form-control' } %>
         </div>
       </div>
 
@@ -82,17 +138,17 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div id="description_el" class="form-group">
         <%= f.label :description, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
-          <%= f.text_area :description, class:'form-control', required:true, rows: 4 %>
+          <%= f.text_area :description, class:'form-control', rows: 4 %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label :note, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
-          <%= f.text_area :note, class:'form-control', required:true, rows: 4 %>
+          <%= f.text_area :note, class:'form-control', rows: 4 %>
         </div>
       </div>
 
@@ -235,12 +291,35 @@
       $('#operation_number').css('display', 'block');
       $('#compliance_date_el').css('display', 'block');
       $('#repair_date_el').css('display', 'none');
+      $('#description_el').css('display', 'none');
+      $('#order_number_el').css('display', 'none');
     }
     else {
       $('#compliance_date_el').css('display', 'none');
       $('#repair_date_el').css('display', 'block');
       $('#operation_number').css('display', 'none');
       $('#claim_number').css('display', 'none');
+      $('#description_el').css('display', 'block');
+      $('#order_number_el').css('display', 'block');
+    }
+    if ($(selectEl).val() == "Service")
+    {
+      $('#service_type_select').css('display','block');
+      //$('#service_type_select').attr('disabled',false);
+      $('#repair_type_select').css('display','none');
+      //$('#repair_type_select').attr('disabled',true);
+    }
+    else if ($(selectEl).val() == "Repair")
+    {
+      $('#service_type_select').css('display','none');
+      //$('#service_type_select').attr('disabled',true);
+      $('#repair_type_select').css('display','block');
+      //$('#repair_type_select').attr('disabled',false);
+    }
+    else
+    {
+      $('#service_type_select').css('display','none');
+      $('#repair_type_select').css('display','none');
     }
   }
   function changeSearchType(elem) {

@@ -13,6 +13,8 @@ class CreateRepairOrders < ActiveRecord::Migration[5.0]
       t.integer :kilometers, :limit => 8
       t.date :repair_date
       t.date :compliance_date
+      t.string :ayax_service_type
+      t.string :ayax_repair_type
 
       t.timestamps
     end

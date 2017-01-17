@@ -85,11 +85,13 @@ ActiveRecord::Schema.define(version: 20170114165458) do
     t.integer  "claim_number"
     t.string   "operation_number"
     t.string   "order_type"
-    t.integer  "kilometers",       limit: 8
+    t.integer  "kilometers",        limit: 8
     t.date     "repair_date"
     t.date     "compliance_date"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "ayax_service_type"
+    t.string   "ayax_repair_type"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["car_id"], name: "index_repair_orders_on_car_id"
     t.index ["mechanic_id"], name: "index_repair_orders_on_mechanic_id"
   end

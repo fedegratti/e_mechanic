@@ -68,10 +68,10 @@
       </tr>
       <tr>
         <td>
-          <strong><%= t('ayax') %></strong>
+          <strong><%= t('in_ayax') %></strong>
         </td>
         <td>
-          <%= @repair_order.ayax %>
+          <%= @repair_order.ayax? ? t('yes') : t('no') %>
         </td>
         <td colspan="1"></td>
       </tr>
