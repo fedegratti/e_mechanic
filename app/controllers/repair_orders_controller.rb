@@ -5,7 +5,7 @@ class RepairOrdersController < ApplicationController
 
 #'MA3FC31S6FA744592'
   def send_to_ayax data
-    cookie = get_ayax_cookie
+    cookie = get_ayax_cookie params[:repair_order][:car_chassis_number]
 
     #data = "tipo=4&kms=34725&tiporep=Motor&descrep=descripcion&nroord=8888&obs=observacion&fecing=16%2F01%2F2017&tecnico=tecnico&agregar=Agregar"
     #data_example = "tipo=4&kms=34725&tipomant=Mantenimiento+35000+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++&descrep=CAMBIO+DE+ACEITE+Y+FILTRO&nroord=7266&obs=&fecing=09%2F01%2F2017&tecnico=FERNANDO&agregar=Agregar"
@@ -36,7 +36,7 @@ class RepairOrdersController < ApplicationController
   end
 
   def import_from_ayax
-    cookie = get_ayax_cookie
+    cookie = get_ayax_cookie params[:chassis_number]
 
     # Get the xls file
     download = open("http://www.dat-ayax.com/armoArchExcel.php?pchassis=#{@chassis_number}",
@@ -177,56 +177,7 @@ class RepairOrdersController < ApplicationController
 
     respond_to do |format|
       if @repair_order.save
-        if @repair_order.ayax
-
-          type_association = Hash.new
-          #type_association['Warranty'] = ''
-          type_association['Campaign'] = '1'
-          type_association['Repair'] = '2'
-          type_association['Service'] = '4'
-
-          if @repair_order.order_type == "Service"
-            data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
-                                       "kms" => @repair_order.kilometers,
-                                       "tipomant" => @repair_order.ayax_service_type,
-                                       "descrep" => @repair_order.description,
-                                       "nroord" => @repair_order.order_number,
-                                       "obs" => @repair_order.note,
-                                       "fecing" => @repair_order.repair_date.strftime("%d/%m/%Y"),
-                                       "tecnico" => @repair_order.mechanic.first_name,
-                                       "agregar" => "Agregar")
-          elsif @repair_order.order_type == "Repair"
-            data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
-                                       "kms" => @repair_order.kilometers,
-                                       "tiporep" => @repair_order.ayax_repair_type,
-                                       "descrep" => @repair_order.description,
-                                       "nroord" => @repair_order.order_number,
-                                       "obs" => @repair_order.note,
-                                       "fecing" => @repair_order.repair_date.strftime("%d/%m/%Y"),
-                                       "tecnico" => @repair_order.mechanic.first_name,
-                                       "agregar" => "Agregar")
-          elsif @repair_order.order_type == "Campaign"
-            data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
-                                       "kms" => @repair_order.kilometers,
-                                       "obs" => @repair_order.note,
-                                       "feccump" => @repair_order.compliance_date.strftime("%d/%m/%Y"),
-                                       "tecnico" => @repair_order.mechanic.first_name,
-                                       "agregar" => "Agregar")
-          end
-
-          puts data
-          puts data.length
-          res = send_to_ayax data
-          if res.code == 200
-            if res.body.include? "Existen datos que no han sido validados"
-              @repair_order.ayax = false
-            end
-          elsif res.code != 200
-            @repair_order.ayax = false
-          end
-
-          @repair_order.save
-        end
+        prepare_data_and_send_to_ayax
         format.html { redirect_to repair_order_path(@repair_order), notice: 'Repair order was successfully created.' }
         format.json { render :show, status: :created, location: @repair_order }
       else
@@ -241,12 +192,67 @@ class RepairOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @repair_order.update(repair_order_params)
+        #prepare_data_and_send_to_ayax
         format.html { redirect_to repair_order_path(@repair_order), notice: 'Repair order was successfully updated.' }
         format.json { render :show, status: :ok, location: @repair_order }
       else
         format.html { render :edit }
         format.json { render json: @repair_order.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def prepare_data_and_send_to_ayax
+    if @repair_order.ayax
+
+      type_association = Hash.new
+      #type_association['Warranty'] = ''
+      type_association['Campaign'] = '1'
+      type_association['Repair'] = '2'
+      type_association['Service'] = '4'
+
+      if @repair_order.order_type == "Service"
+        data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
+                                   "kms" => @repair_order.kilometers,
+                                   "tipomant" => @repair_order.ayax_service_type,
+                                   "descrep" => @repair_order.description,
+                                   "nroord" => @repair_order.order_number,
+                                   "obs" => @repair_order.note,
+                                   "fecing" => @repair_order.repair_date.strftime("%d/%m/%Y"),
+                                   "tecnico" => @repair_order.mechanic.first_name,
+                                   "agregar" => "Agregar")
+      elsif @repair_order.order_type == "Repair"
+        data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
+                                   "kms" => @repair_order.kilometers,
+                                   "tiporep" => @repair_order.ayax_repair_type,
+                                   "descrep" => @repair_order.description,
+                                   "nroord" => @repair_order.order_number,
+                                   "obs" => @repair_order.note,
+                                   "fecing" => @repair_order.repair_date.strftime("%d/%m/%Y"),
+                                   "tecnico" => @repair_order.mechanic.first_name,
+                                   "agregar" => "Agregar")
+      elsif @repair_order.order_type == "Campaign"
+        data = URI.encode_www_form("tipo" => type_association[@repair_order.order_type],
+                                   "kms" => @repair_order.kilometers,
+                                   "obs" => @repair_order.note,
+                                   "feccump" => @repair_order.compliance_date.strftime("%d/%m/%Y"),
+                                   "tecnico" => @repair_order.mechanic.first_name,
+                                   "agregar" => "Agregar")
+      end
+
+      puts data
+      puts data.length
+      res = send_to_ayax data
+      if res.code == 200
+        if res.body.include? "Existen datos que no han sido validados"
+          @repair_order.ayax = false
+        end
+      elsif res.code != 200
+        @repair_order.ayax = false
+      end
+
+      @repair_order.save
+
     end
   end
 
@@ -290,8 +296,8 @@ class RepairOrdersController < ApplicationController
       @mechanics = Mechanic.all
     end
 
-    def get_ayax_cookie
-      @chassis_number = params[:chassis_number]
+    def get_ayax_cookie chassis_number
+      @chassis_number = chassis_number
 
       # Request to get an ayax cookie session
       data = "usuario=#{ENV['ayax_user']}&password=#{ENV['ayax_pass']}&Ingresar=Ingresar"
