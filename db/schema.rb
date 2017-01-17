@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20170114165458) do
     t.integer  "city_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "telephone"
+    t.integer  "telephone",      limit: 8
     t.string   "address"
     t.string   "email"
     t.string   "identification"
     t.string   "type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["city_id"], name: "index_clients_on_city_id"
   end
 
@@ -81,15 +81,15 @@ ActiveRecord::Schema.define(version: 20170114165458) do
     t.integer  "order_number"
     t.string   "description"
     t.string   "note"
-    t.boolean  "ajax"
+    t.boolean  "ayax"
     t.integer  "claim_number"
     t.string   "operation_number"
     t.string   "type"
-    t.integer  "kilometers"
+    t.integer  "kilometers",       limit: 8
     t.date     "repair_date"
     t.date     "compliance_date"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["car_id"], name: "index_repair_orders_on_car_id"
     t.index ["mechanic_id"], name: "index_repair_orders_on_mechanic_id"
   end

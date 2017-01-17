@@ -27,7 +27,37 @@ class RepairOrder < ApplicationRecord
   end
 
   def self.get_by_order_number order_number
-    @repair_order = self.where("order_number = ?", "#{order_number}")
-    @repair_order.first
+    repair_order = self.where("order_number = ?", "#{order_number}")
+    repair_order.first
   end
+
+  def self.get_by_chassis_number chassis_number
+    car = Car.get_by_chassis_number chassis_number
+
+    repair_orders = car.repair_orders unless car.nil?
+    repair_orders = [] unless !repair_orders.nil?
+    repair_orders
+  end
+
+  def self.get_by_identification identification
+    client = Client.get_by_identification identification
+    repair_orders = nil
+    unless client.nil? then
+      # if client.cars.empty? then
+      #   repair_orders = []
+      # else
+        client.cars.each do |car|
+          if repair_orders.nil? then
+            repair_orders = car.repair_orders
+          else
+            repair_orders += car.repair_orders
+          end
+        end
+      # end
+    end
+
+    repair_orders = repair_orders.nil? ? [] : repair_orders
+    repair_orders
+  end
+
 end

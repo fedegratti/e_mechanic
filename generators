@@ -21,7 +21,7 @@ Manual:
 rails generate scaffold manual car:references operation_number:string
 
 Repair order:
-rails generate scaffold repair_order car:references order_number:integer description:string ajax:boolean type:string claim_number:integer operation_number:string
+rails generate scaffold repair_order car:references order_number:integer description:string ayax:boolean type:string claim_number:integer operation_number:string
 
 Mechanic:
 rails generate scaffold mechanic city:references first_name:string last_name:string telephone:integer address:string email:string identification:string

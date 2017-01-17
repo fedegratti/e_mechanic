@@ -1,6 +1,9 @@
-<h1>Editing Repair Order</h1>
+<div class="row">
+  <div class="col-lg-6">
+  <%= link_to t('show'), repair_order_path(@repair_order), class: 'btn btn-primary btn-back' %>
+  <%= link_to t('back'), repair_orders_path, class: 'btn btn-primary btn-back' %>
+  <h1><%= t('editing_repair_order') %></h1>
+  </div>
+</div>
 
 <%= render 'form', repair_order: @repair_order %>
-
-<%= link_to 'Show', repair_order_path(@repair_order) %> |
-<%= link_to 'Back', repair_orders_path %>

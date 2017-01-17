@@ -24,8 +24,11 @@ a.btn.btn-primary:visited {
 body {
   margin: 0;
 }
-h1 {
+h1,h2 {
   font-family: satellite !important;
+}
+a, a:hover, a:focus {
+    background-color: transparent;
 }
 .btn-back {
   display: inline-table;
@@ -244,4 +247,17 @@ body {
 .form-horizontal .checkbox {
     padding-top: 0!important;
     padding-left: 130!important;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    color: #009688;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+    background-color: #009688;
+    border-color: #009688;
 }

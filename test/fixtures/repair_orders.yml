@@ -4,7 +4,7 @@ one:
   car: one
   order_number: 1
   description: MyString
-  ajax: false
+  ayax: false
   claim_number: 1
   operation_number: MyString
 
@@ -12,6 +12,6 @@ two:
   car: two
   order_number: 1
   description: MyString
-  ajax: false
+  ayax: false
   claim_number: 1
   operation_number: MyString

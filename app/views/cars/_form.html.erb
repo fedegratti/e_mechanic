@@ -23,7 +23,7 @@
     <% @options = [] %>
     <% @clients.each do |client| %>
       <% @option = [] %>
-      <% @option << client.first_name + ' ' + client.last_name %>
+      <% @option << client.first_name.to_s + ' ' + client.last_name.to_s %>
       <% @option << client.id.to_s %>
       <% @options << @option %>
     <% end %>
@@ -60,13 +60,6 @@
       <%= f.label t(:plate), class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.text_field :plate, class:'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label t(:kilometers), class: "col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.number_field :kilometers, class:'form-control' %>
       </div>
     </div>
 

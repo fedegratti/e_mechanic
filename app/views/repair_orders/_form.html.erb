@@ -1,4 +1,4 @@
-<%= form_for(repair_order, url: repair_order_path(repair_order), html: { class: "form-horizontal", role: "form" }) do |f| %>
+<%= form_for(repair_order, url: repair_order, html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if repair_order.errors.any? %>
     <div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert">×</button>
@@ -23,31 +23,45 @@
         </div>
       </div>
 
+      <% @options = options_for_select(
+        [
+          [t('campaign'), "Campaign"],
+          [t('warranty'), "Warranty"],
+          [t('repair'), "Repair"],
+          [t('service'), "Service"]
+        ], 4
+      ) %>
+
       <div class="form-group">
         <%= f.label t(:type), class: "col-sm-2 control-label" %>
-        <div class="col-sm-10">
-          <select id="type_select" name="repair_order[type]" class="form-control" required="true">
+         <div class="col-sm-10">
+         <!-- <select id="type_select" name="repair_order[type]" class="form-control" required="true" >
             <option value="Campaign"><%= t('campaign') %></option>
             <option value="Warranty"><%= t('warranty') %></option>
-            <option value="Maintenance"><%= t('maintenance') %></option>
             <option value="Repair"><%= t('repair') %></option>
             <option value="Service"><%= t('service') %></option>
-          </select>
+          </select> -->
+          <%= f.select :type, @options, {}, { id: 'type_select', class:'form-control', required: true } %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label t(:search_car), class:'col-lg-2 control-label'  %>
-        <div class="col-lg-4 search-car-toggle">
+        <div class="col-lg-3 search-car-toggle">
           <div class="togglebutton">
             <label>
               <%= t('by_ci') %> &nbsp; &nbsp;<input id="toggle_button" onClick="changeSearchType(this);" type="checkbox" checked> <%= t('by_chassis_number') %>
             </label>
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <%= f.text_field :car_chassis_number, class:'form-control', data: { autocomplete_source: '/chassis_numbers'} %>
           <%= f.text_field :ci_number, class:'form-control hidden', data: { autocomplete_source: '/cis'} %>
+        </div>
+        <div class="col-lg-3">
+          <div class="btn-group btn-group-justified btn-group-raised">
+            <a class="btn btn-primary" id="import_btn" onClick="importFromAyax()" title="<%= t('import_data_from_ayax') %>"><%= t('import') %> <span id="refresh_icon" class="glyphicon glyphicon-refresh" aria-hidden="true" style="display: none;"></span> <span id="okay_icon" class="glyphicon glyphicon-ok" aria-hidden="true" style="display:none;"></span></a>
+          </div>
         </div>
       </div>
 
@@ -68,6 +82,13 @@
       </div>
 
       <div class="form-group">
+        <%= f.label t(:kilometers), class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.number_field :kilometers, class:'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
         <%= f.label :description, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
           <%= f.text_area :description, class:'form-control', required:true, rows: 4 %>
@@ -75,19 +96,47 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :ajax, class:'col-lg-2 control-label' %>
+        <%= f.label :note, class:'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+          <%= f.text_area :note, class:'form-control', required:true, rows: 4 %>
+        </div>
+      </div>
+
+      <% @options = [] %>
+      <% @mechanics.each do |mechanic| %>
+        <% @option = [] %>
+        <% @option << mechanic.first_name.to_s + ' ' + mechanic.last_name.to_s %>
+        <% @option << mechanic.id.to_s %>
+        <% @options << @option %>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label t(:mechanic), class:'col-lg-2 control-label'  %>
+        <div class="col-lg-10">
+          <%= f.select :mechanic_id, @options, {}, { class: "form-control", required: true } %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :ayax, class:'col-lg-2 control-label' %>
         <div class="checkbox">
           <label>
-           <%= f.check_box :ajax %><span class="checkbox-material"></span>
+           <%= f.check_box :ayax %><span class="checkbox-material"></span>
           </label>
-<!--           <div class="row-content">
-            <div class="action-secondary">
-              <i class="material-icons">info</i>
-            </div>
-            <h4 class="list-group-item-heading">Tile with an icon</h4>
+        </div>
+      </div>
 
-            <p class="list-group-item-text">Maecenas sed diam eget risus varius blandit.</p>
-          </div> -->
+      <div id="repair_date_el" class="form-group">
+        <%= f.label t(:repair_date), class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.date_select :repair_date, {use_month_names: [t(:jan), t(:feb), t(:mar), t(:apr), t(:may), t(:jun), t(:jul), t(:aug), t(:sep), t(:oct), t(:nov), t(:dec)],start_year: 2016, class:'form-control' } %>
+        </div>
+      </div>
+
+      <div id="compliance_date_el" class="form-group">
+        <%= f.label t(:compliance_date), class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.date_select :compliance_date, {use_month_names: [t(:jan), t(:feb), t(:mar), t(:apr), t(:may), t(:jun), t(:jul), t(:aug), t(:sep), t(:oct), t(:nov), t(:dec)],start_year: 2016, class:'form-control' } %>
         </div>
       </div>
 
@@ -115,12 +164,9 @@
 </div>
 <script type="text/javascript">
   $('#repair_order_car_chassis_number').autocomplete({ source: $('#repair_order_car_chassis_number').data('autocomplete-source')});
-  //$("#repair_order_car_chassis_number").data("ui-autocomplete")._trigger("change")
   $('#repair_order_ci_number').autocomplete({source: $('#repair_order_ci_number').data('autocomplete-source')});
 
   $('#repair_order_car_chassis_number').on('change input autocompleteselect',function(event, ui){
-    // console.log($(this).val().length);
-    // console.log(ui);
     if ($(this).val().length == 17)
       selectCar('/get_car_by_chassis_number/'+$(this).val());
     else if (ui)
@@ -128,8 +174,6 @@
 
   })
   $('#repair_order_ci_number').on('change input autocompleteselect',function(event, ui){
-    console.log($(this).val().length);
-    console.log(ui);
     if (ui)
       selectCar('/get_car_by_client_identification/'+ui.item.value);
     else if ($(this).val().length > 0)
@@ -139,13 +183,11 @@
     toggleSelect(this);
   });
   $('#repair_order_car_select').change(function(){
-    console.log($(this).val());
     $('#repair_order_car_id').val($(this).val());
   });
 
   function selectCar(url) {
     $.get(url,function(data){
-        console.log(data.length)
         if (data.length > 1)
         {
           $('#car_select').removeClass('hidden');
@@ -173,28 +215,53 @@
         }
       });
   }
+  function importFromAyax () {
+    if (!$('#import_btn').attr('disabled'))
+    {
+      $('#import_btn').attr('disabled',true);
+      $('#refresh_icon').css('display','block');
+      $('#okay_icon').css('display','none');
+      var chassis_number_el = $('#repair_order_car_chassis_number');
+      if (chassis_number_el.val().length == 17)
+        $.get('/import_data_from_ayax/'+chassis_number_el.val(),function(res){
+          $('#import_btn').attr('disabled',false);
+          $('#refresh_icon').css('display','none');
+          $('#okay_icon').css('display','block');
+          console.log(res)
+        })
+      console.log("holis")
+    }
+  }
   function toggleSelect (selectEl) {
     if ($(selectEl).val() == "Campaign") {
       $('#claim_number').css('display', 'block');
       $('#operation_number').css('display', 'block');
+      $('#compliance_date_el').css('display', 'block');
+      $('#repair_date_el').css('display', 'none');
     }
     else {
-      $('#claim_number').css('display', 'none');
+      $('#compliance_date_el').css('display', 'none');
+      $('#repair_date_el').css('display', 'block');
       $('#operation_number').css('display', 'none');
+      $('#claim_number').css('display', 'none');
     }
   }
   function changeSearchType(elem) {
-
+    toggleSearchType(elem);
     if ($(elem).prop('checked'))
     {
-      $('#repair_order_car_chassis_number').removeClass('hidden');
-      $('#repair_order_ci_number').addClass('hidden');
+      chassis_number_el = $('#repair_order_car_chassis_number');
+      $('#import_btn').attr('disabled',false);
+      if (chassis_number_el.val().length == 17)
+        getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+chassis_number_el.val());
     }
-    else {
-      $('#repair_order_car_chassis_number').addClass('hidden');
-      $('#repair_order_ci_number').removeClass('hidden');
+    else
+    {
+      ci_number_el = $('#repair_order_ci_number');
+      $('#import_btn').attr('disabled',true);
+      if (ci_number_el.val().length > 0)
+        getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ci_number_el.val());
     }
-
   }
 </script>
 <% end %>

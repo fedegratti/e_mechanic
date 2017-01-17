@@ -17,3 +17,16 @@
 //= require bootstrap-sprockets
 //= require bootstrap-material-design
 //= require_tree .
+
+function toggleSearchType(elem) {
+
+  if ($(elem).prop('checked'))
+  {
+    $('#repair_order_car_chassis_number').removeClass('hidden');
+    $('#repair_order_ci_number').addClass('hidden');
+  }
+  else {
+    $('#repair_order_car_chassis_number').addClass('hidden');
+    $('#repair_order_ci_number').removeClass('hidden');
+  }
+}

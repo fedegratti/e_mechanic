@@ -4,7 +4,7 @@ class CreateClients < ActiveRecord::Migration[5.0]
       t.references :city, foreign_key: true
       t.string :first_name
       t.string :last_name
-      t.integer :telephone
+      t.integer :telephone, :limit => 8
       t.string :address
       t.string :email
       t.string :identification
