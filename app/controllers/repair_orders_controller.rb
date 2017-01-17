@@ -3,7 +3,38 @@ class RepairOrdersController < ApplicationController
   before_action :set_last_repair_order_id, only: [:new, :edit]
   before_action :set_mechanics, only: [:new, :edit]
 
+#'MA3FC31S6FA744592'
+  def send_to_ayax
+    cookie = get_ayax_cookie
 
+    #data = "tipo=4&kms=34725&tiporep=Motor&descrep=descripcion&nroord=8888&obs=observacion&fecing=16%2F01%2F2017&tecnico=tecnico&agregar=Agregar"
+    #data_example = "tipo=4&kms=34725&tipomant=Mantenimiento+35000+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++&descrep=CAMBIO+DE+ACEITE+Y+FILTRO&nroord=7266&obs=&fecing=09%2F01%2F2017&tecnico=FERNANDO&agregar=Agregar"
+
+    path = '/grabarHistorial.php'
+    data = "tipo=4&kms=30086&tipomant=Mantenimiento+30000+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++&descrep=CAMBIO+DE+ACEITE+Y+FILTRO%2C+Y+CAMBIO+DE+FILTRO+DE+NAFTA&nroord=7267&obs=&fecing=09%2F01%2F2017&tecnico=FERNANDO&agregar=Agregar"
+
+    headers = {
+      "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Encoding" => "zip, deflate",
+      "Accept-Language" => "en-US,en;q=0.8",
+      "Cache-Control" => "max-age=0",
+      "Connection" => "keep-alive",
+      "Content-Length" => "263",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Cookie" => cookie,
+      "Host" => "www.dat-ayax.com",
+      "Origin" => "http://www.dat-ayax.com",
+      "Referer" => "http://www.dat-ayax.com/Historialvehiculo.php?flujo=valchassis",
+      "Upgrade-Insecure-Requests" => "1",
+      "User-Agent" => "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36"
+    }
+
+    http = Net::HTTP.new('www.dat-ayax.com')
+
+    res = http.post(path, data, headers)
+
+    render json: { res: res }
+  end
 
   def import_from_ayax
     cookie = get_ayax_cookie
@@ -109,7 +140,7 @@ class RepairOrdersController < ApplicationController
                                                  repair_date: repair_date,
                                                  compliance_date: compliance_date,
                                                  created_at: create_date,
-                                                 type: type_association[type])
+                                                 order_type: type_association[type])
             end
           end
         end
@@ -122,8 +153,8 @@ class RepairOrdersController < ApplicationController
   # GET /repair_orders
   # GET /repair_orders.json
   def index
-    #@repair_orders = RepairOrder.limit 10
     @repair_orders = RepairOrder.paginate(:page => params[:page], :per_page => 10)
+    #@chassis_numbers = Car.all.pluck(:chassis_number)
   end
 
   # GET /repair_orders/1
@@ -269,6 +300,6 @@ class RepairOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repair_order_params
-      params.require(:repair_order).permit(:car_id, :mechanic_id, :order_number, :description, :ayax, :claim_number, :operation_number, :type, :kilometers, :repair_date, :compliance_date, :note)
+      params.require(:repair_order).permit(:car_id, :mechanic_id, :order_number, :description, :ayax, :claim_number, :operation_number, :order_type, :kilometers, :repair_date, :compliance_date, :note)
     end
 end

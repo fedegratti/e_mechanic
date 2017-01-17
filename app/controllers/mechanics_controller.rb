@@ -1,5 +1,6 @@
 class MechanicsController < ApplicationController
   before_action :set_mechanic, only: [:show, :edit, :update, :destroy]
+  before_action :set_cities, only: [:new, :edit]
 
   # GET /mechanics
   # GET /mechanics.json
@@ -65,6 +66,10 @@ class MechanicsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_mechanic
       @mechanic = Mechanic.find(params[:id])
+    end
+
+    def set_cities
+      @cities = City.all.pluck(:name, :id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

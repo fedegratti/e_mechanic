@@ -1,64 +1,127 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+<div class="alert alert-dismissable alert-success">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <%= notice %>
+</div>
+<% end %>
 
-<p>
-  <strong>Order number:</strong>
-  <%= @repair_order.order_number %>
-</p>
 
-<p>
-  <strong>Car:</strong>
-  <%= @repair_order.car.name %>
-</p>
+<div class="col-lg-4">
 
-<p>
-  <strong>Mechanic:</strong>
-  <%= @repair_order.mechanic.name %>
-</p>
+  <h1><%= t('order_information_number', order_number: @repair_order.order_number) %>: <%= @repair_order.order_number %></h1>
 
-<p>
-  <strong>Type:</strong>
-  <%= @repair_order.type %>
-</p>
+  <table class="table table-striped table-hover ">
+    <tbody>
+      <tr>
+        <td>
+          <strong><%= t('order_number') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.order_number %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('car') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.car.name %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('mechanic') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.mechanic.name %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('type') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.order_type %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('description') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.description %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('note') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.note %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('ayax') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.ayax %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('kilometers') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.kilometers %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('repair_date') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.repair_date %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('compliance_date') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.compliance_date %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('claim_number') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.claim_number %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('operation_number') %></strong>
+        </td>
+        <td>
+          <%= @repair_order.operation_number %>
+        </td>
+        <td colspan="1"></td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>
-  <strong>Description:</strong>
-  <%= @repair_order.description %>
-</p>
-
-<p>
-  <strong>Note:</strong>
-  <%= @repair_order.note %>
-</p>
-
-<p>
-  <strong>Ayax:</strong>
-  <%= @repair_order.ayax %>
-</p>
-
-<p>
-  <strong>Kilometers:</strong>
-  <%= @repair_order.kilometers %>
-</p>
-
-<p>
-  <strong>Repair date:</strong>
-  <%= @repair_order.repair_date %>
-</p>
-
-<p>
-  <strong>Compliance date:</strong>
-  <%= @repair_order.compliance_date %>
-</p>
-
-<p>
-  <strong>Claim number:</strong>
-  <%= @repair_order.claim_number %>
-</p>
-
-<p>
-  <strong>Operation number:</strong>
-  <%= @repair_order.operation_number %>
-</p>
-
-<%= link_to 'Edit', edit_repair_order_path(@repair_order) %> |
-<%= link_to 'Back', repair_orders_path %>
+<%= link_to t(:edit), edit_repair_order_path(@repair_order), class:"btn btn-primary" %>
+<%= link_to t(:back), repair_orders_path, class:"btn btn-primary" %>

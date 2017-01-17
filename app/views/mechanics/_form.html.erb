@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :city_id %>
-    <%= f.text_field :city_id %>
-  </div>
-
-  <div class="field">
     <%= f.label :first_name %>
     <%= f.text_field :first_name %>
   </div>
@@ -32,13 +27,20 @@
   </div>
 
   <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
     <%= f.label :address %>
     <%= f.text_field :address %>
   </div>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+  <div class="form-group">
+    <%= f.label t(:city), class:'col-lg-2 control-label'  %>
+    <div class="col-lg-10">
+      <%= f.select :city_id, @cities, {}, { class: "form-control", required: true } %>
+    </div>
   </div>
 
   <div class="field">

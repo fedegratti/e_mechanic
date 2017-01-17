@@ -39,6 +39,7 @@ es:
   new_city: "Nueva Ciudad"
   new_country: "Nuevo País"
   new_manual: "Nuevo Manual"
+  new_mechanic: "Nuevo Mecánico"
   new_repair_order: "Nueva Orden de reparación"
   new_technical_report: "Nuevo reporte técnico"
   new_state: "Nuevo Departamento"
@@ -103,6 +104,14 @@ es:
       manual:
         car: "Auto"
         operation_number: "Número de operación"
+      mechanic:
+        city: "Ciudad"
+        first_name: "Nombre"
+        last_name: "Apellido"
+        telephone: "Teléfono"
+        address: "Dirección"
+        email: "Email"
+        identification: "CI/RUC"
       technical_report:
         car: "Auto"
         picture: "Foto"

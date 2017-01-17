@@ -28,7 +28,7 @@
         <% end %>
         </td>
         <td><a href="<%= client_path(repair_order.car.client) %>"><%= repair_order.car.client.name %></a></td>
-        <td><%= !repair_order.type.nil? ? t(repair_order.type.downcase) : '' %></td>
+        <td><%= !repair_order.order_type.nil? ? t(repair_order.order_type.downcase) : '' %></td>
         <td><%= repair_order.description %></td>
         <td><%= repair_order.note %></td>
         <td><%= repair_order.kilometers %></td>

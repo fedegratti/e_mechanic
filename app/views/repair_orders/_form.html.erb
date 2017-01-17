@@ -35,13 +35,7 @@
       <div class="form-group">
         <%= f.label t(:type), class: "col-sm-2 control-label" %>
          <div class="col-sm-10">
-         <!-- <select id="type_select" name="repair_order[type]" class="form-control" required="true" >
-            <option value="Campaign"><%= t('campaign') %></option>
-            <option value="Warranty"><%= t('warranty') %></option>
-            <option value="Repair"><%= t('repair') %></option>
-            <option value="Service"><%= t('service') %></option>
-          </select> -->
-          <%= f.select :type, @options, {}, { id: 'type_select', class:'form-control', required: true } %>
+          <%= f.select :order_type, @options, {}, { id: 'type_select', class:'form-control', required: true } %>
         </div>
       </div>
 
@@ -55,8 +49,8 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <%= f.text_field :car_chassis_number, class:'form-control', data: { autocomplete_source: '/chassis_numbers'} %>
-          <%= f.text_field :ci_number, class:'form-control hidden', data: { autocomplete_source: '/cis'} %>
+          <%= f.text_field :car_chassis_number, class:'form-control', data: { autocomplete_source: '/chassis_numbers'}, value: !repair_order.car.nil? ? repair_order.car.chassis_number : ''  %>
+          <%= f.text_field :ci_number, class:'form-control hidden', data: { autocomplete_source: '/cis'}, value: !repair_order.car.nil? && !repair_order.car.client.nil? ? repair_order.car.client.identification : '' %>
         </div>
         <div class="col-lg-3">
           <div class="btn-group btn-group-justified btn-group-raised">
@@ -133,21 +127,21 @@
         </div>
       </div>
 
-      <div id="compliance_date_el" class="form-group">
+      <div id="compliance_date_el" class="form-group" style="display: none;">
         <%= f.label t(:compliance_date), class: "col-sm-2 control-label" %>
         <div class="col-sm-10">
           <%= f.date_select :compliance_date, {use_month_names: [t(:jan), t(:feb), t(:mar), t(:apr), t(:may), t(:jun), t(:jul), t(:aug), t(:sep), t(:oct), t(:nov), t(:dec)],start_year: 2016, class:'form-control' } %>
         </div>
       </div>
 
-      <div id="claim_number" class="form-group">
+      <div id="claim_number" class="form-group" style="display:none;">
         <%= f.label :claim_number, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
           <%= f.number_field :claim_number, class:'form-control' %>
         </div>
       </div>
 
-      <div id="operation_number" class="form-group">
+      <div id="operation_number" class="form-group" style="display:none;">
         <%= f.label :operation_number, class:'col-lg-2 control-label' %>
         <div class="col-lg-10">
           <%= f.text_field :operation_number, class:'form-control' %>
@@ -165,6 +159,8 @@
 <script type="text/javascript">
   $('#repair_order_car_chassis_number').autocomplete({ source: $('#repair_order_car_chassis_number').data('autocomplete-source')});
   $('#repair_order_ci_number').autocomplete({source: $('#repair_order_ci_number').data('autocomplete-source')});
+  getCarByChasisNumber();
+  $('#type_select').val('<%= repair_order.order_type %>');
 
   $('#repair_order_car_chassis_number').on('change input autocompleteselect',function(event, ui){
     if ($(this).val().length == 17)
@@ -227,6 +223,7 @@
           $('#import_btn').attr('disabled',false);
           $('#refresh_icon').css('display','none');
           $('#okay_icon').css('display','block');
+          getCarByChasisNumber();
           console.log(res)
         })
       console.log("holis")
@@ -250,18 +247,22 @@
     toggleSearchType(elem);
     if ($(elem).prop('checked'))
     {
-      chassis_number_el = $('#repair_order_car_chassis_number');
       $('#import_btn').attr('disabled',false);
-      if (chassis_number_el.val().length == 17)
-        getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+chassis_number_el.val());
+      getCarByChasisNumber();
     }
     else
     {
       ci_number_el = $('#repair_order_ci_number');
       $('#import_btn').attr('disabled',true);
       if (ci_number_el.val().length > 0)
-        getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ci_number_el.val());
+        selectCar('/get_car_by_client_identification/'+ci_number_el.val());
     }
   }
+  function getCarByChasisNumber() {
+    chassis_number_el = $('#repair_order_car_chassis_number');
+    if (chassis_number_el.val().length == 17)
+      selectCar('/get_car_by_chassis_number/'+chassis_number_el.val());
+  }
+
 </script>
 <% end %>

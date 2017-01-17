@@ -14,7 +14,7 @@
 
 @car_1 = Car.create(client_id: @client_1.id,brand: 'Ford',model: 'Mustang', chassis_number: 'GP2312389YHD43D23', engine_number: 'asd13123ads', plate: '123asd23', sell_date: Time.now)
 
-@repair_order_1 =   Repair.create(car_id: @car_1.id,
+@repair_order_1 =   RepairOrder.create(car_id: @car_1.id,
                                   mechanic_id: @mechanic_1.id,
                                   order_number: 8898,
                                   description: 'this is a repair',
@@ -22,9 +22,10 @@
                                   ayax: false,
                                   kilometers: 350000,
                                   repair_date: Time.now,
-                                  compliance_date: Time.now + (60 * 60 * 24))
+                                  compliance_date: Time.now + (60 * 60 * 24),
+                                  order_type: 'Repair')
 
-@repair_order_2 = Campaign.create(car_id: @car_1.id,
+@repair_order_2 = RepairOrder.create(car_id: @car_1.id,
                                   mechanic_id: @mechanic_1.id,
                                   order_number: 8899,
                                   description: 'this is a campaign',
@@ -34,7 +35,8 @@
                                   operation_number:'aa22dd33',
                                   kilometers: 20,
                                   repair_date: Time.now,
-                                  compliance_date: Time.now + (60 * 60 * 24))
+                                  compliance_date: Time.now + (60 * 60 * 24),
+                                  order_type: 'Campaign')
 
 @technical_report_1 = TechnicalReport.create(car_id: @car_1.id,picture:'http://cloudtag.io/pic01.jpg')
 

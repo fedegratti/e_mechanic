@@ -9,7 +9,7 @@ class CreateRepairOrders < ActiveRecord::Migration[5.0]
       t.boolean :ayax
       t.integer :claim_number
       t.string :operation_number
-      t.string :type
+      t.string :order_type
       t.integer :kilometers, :limit => 8
       t.date :repair_date
       t.date :compliance_date

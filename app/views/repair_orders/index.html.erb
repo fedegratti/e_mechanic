@@ -26,7 +26,12 @@
               </div>
               <div class="col-lg-3">
                 <div class="btn-group btn-group-justified btn-group-raised">
-                  <a class="btn btn-primary" id="import_btn" onClick="importFromAyax()" title="<%= t('import_data_from_ayax') %>"><%= t('import') %> <span id="refresh_icon" class="glyphicon glyphicon-refresh" aria-hidden="true" style="display: none;"></span> <span id="okay_icon" class="glyphicon glyphicon-ok" aria-hidden="true" style="display:none;"></span><span id="fail_icon" class="glyphicon glyphicon-remove" aria-hidden="true" style="display: none; color: #dc0f00;"></span></a>
+                  <a class="btn btn-primary" id="import_btn" onClick="importFromAyax()" disabled="true" title="<%= t('import_data_from_ayax') %>">
+                    <%= t('import') %>
+                    <span id="refresh_icon" class="glyphicon glyphicon-refresh" aria-hidden="true" style="display: none;"></span>
+                    <span id="okay_icon" class="glyphicon glyphicon-ok" aria-hidden="true" style="display:none;"></span>
+                    <span id="fail_icon" class="glyphicon glyphicon-remove" aria-hidden="true" style="display: none; color: #dc0f00;"></span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -66,6 +71,8 @@
       getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+$(this).val());
     else if (ui)
       getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+ui.item.value);
+    else
+      $('#import_btn').attr('disabled',true);
 
   })
   $('#repair_order_ci_number').on('change input autocompleteselect',function(event, ui){
@@ -77,6 +84,7 @@
 
   function getRepairOrders(url,data)
   {
+    $('#import_btn').attr('disabled',false);
     $.post(url,data,function(data){$('#repair_orders_table').html(data)});
   }
 
@@ -116,7 +124,6 @@
           $('#refresh_icon').css('display','none');
           $('#fail_icon').css('display','block');
         })
-      console.log("holis")
     }
   }
 </script>
