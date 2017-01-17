@@ -61,3 +61,4 @@ gem 'roo-xls'
 gem 'figaro'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
