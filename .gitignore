@@ -23,6 +23,8 @@
 # Ignore Env variables
 /config/application.yml
 
+/config/boot.rb
+
 # Ignore downloads
 /downloads/*
 
