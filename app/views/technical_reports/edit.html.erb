@@ -1,6 +1,12 @@
-<h1>Editing Technical Report</h1>
+<div class="alert alert-dismissable alert-warning">
+  <%= t('under_development') %>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+  <%= link_to t('back'), technical_reports_path, class: 'btn btn-primary btn-back' %>
+  <%= link_to t('show'), @technical_report, class: 'btn btn-primary btn-back' %>
+  <h1><%= t('editing_technical_report') %></h1>
+  </div>
+</div>
 
 <%= render 'form', technical_report: @technical_report %>
-
-<%= link_to 'Show', @technical_report %> |
-<%= link_to 'Back', technical_reports_path %>

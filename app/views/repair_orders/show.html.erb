@@ -8,7 +8,7 @@
 
 <div class="col-lg-4">
 
-  <h1><%= t('order_information_number', order_number: @repair_order.order_number) %>: <%= @repair_order.order_number %></h1>
+  <h1><%= t('order_information_number') %> <%= @repair_order.order_number %></h1>
 
   <table class="table table-striped table-hover ">
     <tbody>
@@ -44,7 +44,7 @@
           <strong><%= t('type') %></strong>
         </td>
         <td>
-          <%= @repair_order.order_type %>
+          <%= t(@repair_order.order_type.downcase) %>
         </td>
         <td colspan="1"></td>
       </tr>
@@ -125,3 +125,5 @@
 
 <%= link_to t(:edit), edit_repair_order_path(@repair_order), class:"btn btn-primary" %>
 <%= link_to t(:back), repair_orders_path, class:"btn btn-primary" %>
+
+</div>

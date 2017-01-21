@@ -1,14 +1,34 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+<div class="alert alert-dismissable alert-success">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <%= notice %>
+</div>
+<% end %>
 
-<p>
-  <strong>Car:</strong>
-  <%= @manual.car.name %>
-</p>
+<h1><%= t('information_of') %> <%= @manual.name %></h1>
 
-<p>
-  <strong>Operation number:</strong>
-  <%= @manual.operation_number %>
-</p>
+<div class="col-lg-4">
+  <table class="table table-striped table-hover ">
+    <tbody>
+      <tr>
+        <td>
+          <strong><%= t('car') %></strong>
+        </td>
+        <td>
+          <a href="<%= car_path(@manual.car) %>"><%= @manual.car.name %></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('operation_number') %></strong>
+        </td>
+        <td>
+          <%= @manual.operation_number %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<%= link_to 'Edit', edit_manual_path(@manual) %> |
-<%= link_to 'Back', manuals_path %>
+  <%= link_to t(:edit), edit_manual_path(@manual), class:"btn btn-primary" %>
+  <%= link_to t(:back), manuals_path, class:"btn btn-primary" %>
+</div>

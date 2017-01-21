@@ -10,8 +10,6 @@
       <th><%= t('activerecord.attributes.repair_order.note') %></th>
       <th><%= t('activerecord.attributes.repair_order.kilometers') %></th>
       <th><%= t('activerecord.attributes.repair_order.in_ayax') %></th>
-      <th><%= t('activerecord.attributes.repair_order.claim_number') %></th>
-      <th><%= t('activerecord.attributes.repair_order.operation_number') %></th>
       <th><%= t('activerecord.attributes.repair_order.repair_date') %></th>
       <th><%= t('activerecord.attributes.repair_order.created_at') %></th>
       <th colspan="3"></th>
@@ -33,8 +31,6 @@
         <td><%= repair_order.note %></td>
         <td><%= repair_order.kilometers %></td>
         <td><%= repair_order.ayax ? t('yes') : t('no') %></td>
-        <td><%= repair_order.claim_number %></td>
-        <td><%= repair_order.operation_number %></td>
         <td><%= repair_order.repair_date %></td>
         <td><%= repair_order.created_at.strftime("%d-%m-%Y") %></td>
         <td><%= link_to t('show'), repair_order_path(repair_order) %></td>

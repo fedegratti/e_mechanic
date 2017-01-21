@@ -1,5 +1,6 @@
 class StatesController < ApplicationController
   before_action :set_state, only: [:show, :edit, :update, :destroy]
+  before_action :set_countries, only: [:new, :edit]
 
   # GET /states
   # GET /states.json
@@ -28,7 +29,7 @@ class StatesController < ApplicationController
 
     respond_to do |format|
       if @state.save
-        format.html { redirect_to @state, notice: 'State was successfully created.' }
+        format.html { redirect_to states_path, notice: 'State was successfully created.' }
         format.json { render :show, status: :created, location: @state }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class StatesController < ApplicationController
   def update
     respond_to do |format|
       if @state.update(state_params)
-        format.html { redirect_to @state, notice: 'State was successfully updated.' }
+        format.html { redirect_to states_path, notice: 'State was successfully updated.' }
         format.json { render :show, status: :ok, location: @state }
       else
         format.html { render :edit }
@@ -65,6 +66,10 @@ class StatesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_state
       @state = State.find(params[:id])
+    end
+
+    def set_countries
+      @countries = Country.all.pluck(:name, :id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

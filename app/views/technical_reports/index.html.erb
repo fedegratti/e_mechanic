@@ -25,7 +25,7 @@
         <% @technical_reports.each do |technical_report| %>
           <tr>
             <td><a href="<%= car_path(technical_report.car) %>"><%= technical_report.car.name %></a></td>
-            <td><%= technical_report.picture %></td>
+            <td><a href="<%= technical_report.picture %>"><%= technical_report.picture %></a></td>
             <td><%= link_to t('show'), technical_report %></td>
             <td><%= link_to t('edit'), edit_technical_report_path(technical_report) %></td>
             <td><%= link_to t('destroy'), technical_report, method: :delete, data: { confirm: t('are_you_sure?') } %></td>

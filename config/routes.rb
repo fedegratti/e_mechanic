@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/get_car_by_chassis_number/:chassis_number' => 'cars#get_by_chassis_number'
   get '/get_car_by_client_identification/:identification' => 'cars#get_by_client_identification'
   get '/import_data_from_ayax/:chassis_number'=>'repair_orders#import_from_ayax'
+  #get '/repair_orders/' => 'repair_orders#index'
   post '/get_repair_orders_by_chassis_number' => 'repair_orders#get_by_chassis_number'
   post '/get_repair_orders_by_client_identification' => 'repair_orders#get_by_identification'
 end

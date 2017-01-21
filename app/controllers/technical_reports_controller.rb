@@ -1,5 +1,6 @@
 class TechnicalReportsController < ApplicationController
   before_action :set_technical_report, only: [:show, :edit, :update, :destroy]
+  before_action :set_cars, only: [:new, :edit]
 
   # GET /technical_reports
   # GET /technical_reports.json
@@ -65,6 +66,10 @@ class TechnicalReportsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_technical_report
       @technical_report = TechnicalReport.find(params[:id])
+    end
+
+    def set_cars
+      @cars = Car.all.pluck(:name, :id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

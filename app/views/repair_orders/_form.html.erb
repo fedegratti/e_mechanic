@@ -25,12 +25,12 @@
 
       <% @options = options_for_select(
         [
-          [t('campaign'), "Campaign"],
-          [t('warranty'), "Warranty"],
+          [t('service'), "Service"],
           [t('repair'), "Repair"],
-          [t('service'), "Service"]
-        ], 4
+          [t('campaign'), "Campaign"]
+        ], 3
       ) %>
+      <% # [t('warranty'), "Warranty"], %>
 
       <div id="order_type_select" class="form-group">
         <%= f.label t(:type), class: "col-sm-2 control-label" %>
@@ -190,20 +190,6 @@
         </div>
       </div>
 
-      <div id="claim_number" class="form-group" style="display:none;">
-        <%= f.label :claim_number, class:'col-lg-2 control-label' %>
-        <div class="col-lg-10">
-          <%= f.number_field :claim_number, class:'form-control' %>
-        </div>
-      </div>
-
-      <div id="operation_number" class="form-group" style="display:none;">
-        <%= f.label :operation_number, class:'col-lg-2 control-label' %>
-        <div class="col-lg-10">
-          <%= f.text_field :operation_number, class:'form-control' %>
-        </div>
-      </div>
-
       <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
           <%= f.submit class:"btn btn-primary" %>
@@ -287,8 +273,6 @@
   }
   function toggleSelect (selectEl) {
     if ($(selectEl).val() == "Campaign") {
-      $('#claim_number').css('display', 'block');
-      $('#operation_number').css('display', 'block');
       $('#compliance_date_el').css('display', 'block');
       $('#repair_date_el').css('display', 'none');
       $('#description_el').css('display', 'none');
@@ -297,8 +281,6 @@
     else {
       $('#compliance_date_el').css('display', 'none');
       $('#repair_date_el').css('display', 'block');
-      $('#operation_number').css('display', 'none');
-      $('#claim_number').css('display', 'none');
       $('#description_el').css('display', 'block');
       $('#order_number_el').css('display', 'block');
     }

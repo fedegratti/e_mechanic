@@ -1,2 +1,0 @@
-class Company < Client
-end

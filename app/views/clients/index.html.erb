@@ -32,7 +32,7 @@
           <tr>
             <td><%= client.first_name %></td>
             <td><%= client.last_name %></td>
-            <td><%= client.type %></td>
+            <td><%= !client.client_type.nil? ? t(client.client_type.downcase) : '' %></td>
             <td><%= client.identification %></td>
             <td><%= client.email %></td>
             <td><%= client.telephone %></td>
@@ -47,6 +47,5 @@
     </table>
   </div>
 </div>
-
 
 <%= link_to t('new_client'), new_client_path, class:"btn btn-primary" %>

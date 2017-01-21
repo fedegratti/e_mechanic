@@ -1,6 +1,9 @@
-<h1>Editing Manual</h1>
+<div class="row">
+  <div class="col-lg-6">
+  <%= link_to t('back'), manuals_path, class: 'btn btn-primary btn-back' %>
+  <%= link_to t('show'), @manual, class: 'btn btn-primary btn-back' %>
+  <h1><%= t('editing_manual') %></h1>
+  </div>
+</div>
 
 <%= render 'form', manual: @manual %>
-
-<%= link_to 'Show', @manual %> |
-<%= link_to 'Back', manuals_path %>

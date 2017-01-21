@@ -1,49 +1,102 @@
-<p id="notice"><%= notice %></p>
+<div class="alert alert-dismissable alert-warning">
+  <%= t('under_development') %>
+</div>
+<% if notice %>
+<div class="alert alert-dismissable alert-success">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <%= notice %>
+</div>
+<% end %>
 
-<p>
-  <strong>First name:</strong>
-  <%= @client.first_name %>
-</p>
+<h1><%= t('information_of') %> <%= @client.name %></h1>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @client.last_name %>
-</p>
+<div class="col-lg-4">
+  <table class="table table-striped table-hover ">
+    <tbody>
+      <tr>
+        <td>
+          <strong><%= t('identification') %></strong>
+        </td>
+        <td>
+          <%= @client.identification %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('first_name') %></strong>
+        </td>
+        <td>
+          <%= @client.first_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('type') %></strong>
+        </td>
+        <td>
+          <%= !@client.client_type.nil? ? t(@client.client_type.downcase) : '' %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('last_name') %> </strong>
+        </td>
+        <td>
+          <%= @client.last_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('telephone') %></strong>
+        </td>
+        <td>
+          <%= @client.telephone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%=  t('email') %></strong>
+        </td>
+        <td>
+          <%= @client.email %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('address') %></strong>
+        </td>
+        <td>
+          <%= @client.address %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('city') %></strong>
+        </td>
+        <td>
+          <%= @client.city.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('state') %></strong>
+        </td>
+        <td>
+          <%= @client.city.state.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= t('country') %></strong>
+        </td>
+        <td>
+          <%= @client.city.state.country.name %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>
-  <strong>Telephone:</strong>
-  <%= @client.telephone %>
-</p>
+<%= link_to t(:edit), edit_client_path(@client), class:"btn btn-primary" %>
+<%= link_to t(:back), clients_path, class:"btn btn-primary" %>
 
-<p>
-  <strong>Address:</strong>
-  <%= @client.address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @client.city.name %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @client.city.state.name %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @client.city.state.country.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @client.email %>
-</p>
-
-<p>
-  <strong>Ci or Ruc:</strong>
-  <%= @client.identification %>
-</p>
-
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+</div>

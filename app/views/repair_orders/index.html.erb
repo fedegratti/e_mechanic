@@ -21,8 +21,8 @@
                 </div>
               </div>
               <div class="col-lg-4">
-                <input class="form-control ui-autocomplete-input" data-autocomplete-source="/chassis_numbers" type="text" name="repair_order[car_chassis_number]" id="repair_order_car_chassis_number" autocomplete="off">
-                <input class="form-control hidden ui-autocomplete-input" data-autocomplete-source="/cis" type="text" name="repair_order[ci_number]" id="repair_order_ci_number" autocomplete="off">
+                <input class="form-control ui-autocomplete-input" data-autocomplete-source="/chassis_numbers" type="text" name="repair_order[car_chassis_number]" id="repair_order_car_chassis_number" autocomplete="off" value="<%= @chassis_number %>">
+                <input class="form-control hidden ui-autocomplete-input" data-autocomplete-source="/cis" type="text" name="repair_order[ci_number]" id="repair_order_ci_number" autocomplete="off" value="<%= @ci_number %>">
               </div>
               <div class="col-lg-3">
                 <div class="btn-group btn-group-justified btn-group-raised">
@@ -61,48 +61,62 @@
   </div>
 </div>
 
-
 <script type="text/javascript">
   $('#repair_order_car_chassis_number').autocomplete({ source: $('#repair_order_car_chassis_number').data('autocomplete-source')});
   $('#repair_order_ci_number').autocomplete({source: $('#repair_order_ci_number').data('autocomplete-source')});
 
+  $(document).ready(function(){
+  if ($('#repair_order_car_chassis_number').val())
+    $('#repair_order_car_chassis_number').change();
+
+  if ($('#repair_order_ci_number').val())
+    $('#repair_order_ci_number').change();
+  })
+
   $('#repair_order_car_chassis_number').on('change input autocompleteselect',function(event, ui){
     if ($(this).val().length == 17)
-      getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+$(this).val());
+      getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+$(this).val(),true);
     else if (ui)
-      getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+ui.item.value);
+      getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+ui.item.value,true);
     else
+    {
       $('#import_btn').attr('disabled',true);
+      $('#refresh_icon').css('display','none');
+      $('#okay_icon').css('display','none');
+      $('#fail_icon').css('display','none');
+    }
 
   })
   $('#repair_order_ci_number').on('change input autocompleteselect',function(event, ui){
     if (ui)
-      getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ui.item.value);
+      getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ui.item.value,false);
     else if ($(this).val().length > 0)
-      getRepairOrders('/get_repair_orders_by_client_identification/','identification='+$(this).val());
+      getRepairOrders('/get_repair_orders_by_client_identification/','identification='+$(this).val(),false);
   })
 
-  function getRepairOrders(url,data)
+  function getRepairOrders(url,data,canImport)
   {
-    $('#import_btn').attr('disabled',false);
+    if (canImport)
+      $('#import_btn').attr('disabled',false);
     $.post(url,data,function(data){$('#repair_orders_table').html(data)});
   }
 
   function changeSearchType(elem) {
     toggleSearchType(elem);
+    $('#import_btn').attr('disabled',true);
+
     if ($(elem).prop('checked'))
     {
       chassis_number_el = $('#repair_order_car_chassis_number');
-      $('#import_btn').attr('disabled',false);
+      //$('#import_btn').attr('disabled',false);
       if (chassis_number_el.val().length == 17)
-        getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+chassis_number_el.val());
+        getRepairOrders('/get_repair_orders_by_chassis_number/','chassis_number='+chassis_number_el.val(),true);
     }
     else
     {
       ci_number_el = $('#repair_order_ci_number');
-      $('#import_btn').attr('disabled',true);
       if (ci_number_el.val().length > 0)
-        getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ci_number_el.val());
+        getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ci_number_el.val(),false);
     }
   }
 
@@ -118,7 +132,7 @@
           $('#import_btn').attr('disabled',false);
           $('#refresh_icon').css('display','none');
           $('#okay_icon').css('display','block');
-          location = location
+          location = '/repair_orders/?chassis_number='+chassis_number_el.val();
         }).fail(function(res) {
           console.log(res);
           $('#refresh_icon').css('display','none');

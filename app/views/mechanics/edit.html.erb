@@ -1,6 +1,9 @@
-<h1>Editing Mechanic</h1>
+<div class="row">
+  <div class="col-lg-6">
+  <%= link_to t('back'), mechanics_path, class: 'btn btn-primary btn-back' %>
+  <%= link_to t('show'), @mechanic, class: 'btn btn-primary btn-back' %>
+  <h1><%= t('editing_mechanic') %></h1>
+  </div>
+</div>
 
 <%= render 'form', mechanic: @mechanic %>
-
-<%= link_to 'Show', @mechanic %> |
-<%= link_to 'Back', mechanics_path %>
