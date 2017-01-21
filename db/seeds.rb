@@ -8,9 +8,9 @@
 
 @mechanic_1 = Mechanic.create(city_id: @city_1.id, first_name: 'Guillermo', last_name: 'test', address: 'a street', email:'guille@test.com', telephone: 12345678, identification: '1231231')
 
-@no_client = Person.create(city_id: @no_city.id, first_name: 'Desconocido',last_name: 'Desconocido',address: '', email:'',telephone: 0,identification: '0')
-@client_1 = Person.create(city_id: @city_1.id, first_name: 'Fede',last_name: 'Gratti',address: '3 y 65 1328', email:'fede@test.com',telephone: 12345678,identification: '23345567')
-@client_2 = Company.create(city_id: @city_1.id, first_name: 'Ta',last_name: 'ta',address: 'en la calle', email:'tata@test.com',telephone: 12345678,identification: 'asd2345')
+@no_client = Client.create(city_id: @no_city.id, first_name: 'Desconocido',last_name: 'Desconocido',address: '', email:'',telephone: 0,identification: '0',client_type: 'Person')
+@client_1 = Client.create(city_id: @city_1.id, first_name: 'Fede',last_name: 'Gratti',address: '3 y 65 1328', email:'fede@test.com',telephone: 12345678,identification: '23345567',client_type: 'Person')
+@client_2 = Client.create(city_id: @city_1.id, first_name: 'Ta',last_name: 'ta',address: 'en la calle', email:'tata@test.com',telephone: 12345678,identification: 'asd2345',client_type: 'Company')
 
 @car_1 = Car.create(client_id: @client_1.id,brand: 'Ford',model: 'Mustang', chassis_number: 'GP2312389YHD43D23', engine_number: 'asd13123ads', plate: '123asd23', sell_date: Time.now)
 
