@@ -25,7 +25,11 @@
           <a href="<%= car_path(repair_order.car) %>"><%= repair_order.car.name %></a>
         <% end %>
         </td>
-        <td><a href="<%= client_path(repair_order.car.client) %>"><%= repair_order.car.client.name %></a></td>
+        <td>
+        <% if repair_order.car? && repair_order.car.client? %>
+          <a href="<%= client_path(repair_order.car.client) %>"><%= repair_order.car.client.name %></a>
+        <% end %>
+        </td>
         <td><%= !repair_order.order_type.nil? ? t(repair_order.order_type.downcase) : '' %></td>
         <td><%= repair_order.description %></td>
         <td><%= repair_order.note %></td>

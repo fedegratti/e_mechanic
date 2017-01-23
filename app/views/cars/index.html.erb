@@ -32,7 +32,11 @@
             <td><%= car.brand %></td>
             <td><%= car.model %></td>
             <td><%= car.chassis_number %></td>
-            <td><a href="<%= client_path(car.client) %>"><%= car.client.name %></a></td>
+            <td>
+            <% if car.client? %>
+              <a href="<%= client_path(car.client) %>"><%= car.client.name %></a>
+            <% end %>
+            </td>
             <td><%= car.engine_number %></td>
             <td><%= car.plate %></td>
 

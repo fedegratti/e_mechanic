@@ -81,7 +81,7 @@ class CarsController < ApplicationController
 
   # GET /get_chassis_numbers/1
   def get_chassis_numbers
-    @chassis_numbers = Car.order(:chassis_number).where("chassis_number like ?", "%#{params[:term]}%")
+    @chassis_numbers = Car.order(:chassis_number).where("chassis_number ilike ?", "%#{params[:term]}%")
     render json: @chassis_numbers.map(&:chassis_number)
   end
 

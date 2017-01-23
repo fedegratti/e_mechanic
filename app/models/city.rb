@@ -3,7 +3,7 @@ class City < ApplicationRecord
   has_many :clients
 
   def self.get_by_name name
-    @city = self.where("name like ?", "%#{name}%")
+    @city = self.where("name ilike ?", "%#{name}%")
     @city.first
   end
 end

@@ -6,6 +6,10 @@ class Car < ApplicationRecord
 
   alias_attribute :name,:model
 
+  def client?
+    self.client != nil
+  end
+
   def self.get_by_chassis_number chassis_number
     @car = self.where("chassis_number = ?", "#{chassis_number}")
     @car.first

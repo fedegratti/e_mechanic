@@ -127,7 +127,7 @@ class RepairOrdersController < ApplicationController
           type_association['Mantenimiento'] = 'Service'
 
           unless order_number.empty?
-            @repair_order = RepairOrder.get_by_order_number order_number
+            @repair_order = RepairOrder.get_by_order_number order_number.to_i
             if @repair_order.nil? then
               @repair_order = RepairOrder.create(car_id: @car.id,
                                                  mechanic_id: mechanic.id,

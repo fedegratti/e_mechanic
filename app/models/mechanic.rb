@@ -7,7 +7,7 @@ class Mechanic < ApplicationRecord
   end
 
   def self.get_by_name name
-    @mechanic = self.where("first_name like ? or last_name like ?", "%#{name}%", "%#{name}%")
+    @mechanic = self.where("first_name ilike ? or last_name ilike ?", "%#{name}%", "%#{name}%")
     @mechanic.first
   end
 end
