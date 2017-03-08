@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   post '/get_repair_orders_by_client_identification' => 'repair_orders#get_by_identification'
 
   post '/clients/get_by_name' => 'clients#get_by_name'
+  post '/cars/get_by_identification' => 'cars#get_by_identification'
 end

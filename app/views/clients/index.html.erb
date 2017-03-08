@@ -5,15 +5,13 @@
 </div>
 <% end %>
 
-
 <div class="container-fluid">
-
   <div class="row">
     <div class="form-horizontal">
       <div class="col-lg-4">
         <div class="well bs-component">
           <div class="form-group">
-            <label class="col-lg-4 control-label" for="repair_order_Buscar auto"><%= t('search_client') %></label>
+            <label class="col-lg-4 control-label" for="client_name"><%= t('search_client') %></label>
 
             <div class="col-lg-7">
               <input class="form-control ui-autocomplete-input" type="text" id="client_name" autocomplete="off">
@@ -36,14 +34,10 @@
   </div>
 </div>
 
-
 <div class="col-lg-12">
-
-  <div class="page-header" style="margin: 0; float: right; padding-right: 10px;">
-  </div>
-
   <div class="bs-component">
     <%= render 'clients_table', clients: @clients %>
+    <%= will_paginate @clients, renderer: BootstrapPagination::Rails %>
   </div>
 </div>
 

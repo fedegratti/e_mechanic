@@ -5,7 +5,7 @@ class MechanicsController < ApplicationController
   # GET /mechanics
   # GET /mechanics.json
   def index
-    @mechanics = Mechanic.all
+    @mechanics = Mechanic.paginate(:page => params[:page], :per_page => 10).order('id DESC')
   end
 
   # GET /mechanics/1

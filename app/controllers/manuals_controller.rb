@@ -5,7 +5,7 @@ class ManualsController < ApplicationController
   # GET /manuals
   # GET /manuals.json
   def index
-    @manuals = Manual.all
+    @manuals = Manual.paginate(:page => params[:page], :per_page => 10).order('id DESC')
   end
 
   # GET /manuals/1

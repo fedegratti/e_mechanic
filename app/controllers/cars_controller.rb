@@ -5,7 +5,7 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json
   def index
-    @cars = Car.all
+    @cars = Car.paginate(:page => params[:page], :per_page => 10).order('id DESC')
   end
 
   # GET /cars/1
@@ -78,6 +78,11 @@ class CarsController < ApplicationController
     render json: @car
   end
 
+  # GET /cars/get_by_identification
+  def get_by_identification
+    @cars = Car.get_by_identification params[:car_identification]
+    render :layout => false
+  end
 
   # GET /get_chassis_numbers/1
   def get_chassis_numbers
@@ -97,6 +102,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:client_id, :brand, :model, :chassis_number, :engine_number, :plate, :kilometers, :sell_date)
+      params.require(:car).permit(:client_id, :brand, :model, :chassis_number, :engine_number, :plate, :kilometers, :sell_date, :car_identification)
     end
 end

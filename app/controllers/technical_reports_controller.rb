@@ -5,7 +5,7 @@ class TechnicalReportsController < ApplicationController
   # GET /technical_reports
   # GET /technical_reports.json
   def index
-    @technical_reports = TechnicalReport.all
+    @technical_reports = TechnicalReport.paginate(:page => params[:page], :per_page => 10).order('id DESC')
   end
 
   # GET /technical_reports/1

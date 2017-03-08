@@ -27,31 +27,31 @@
             </div>
             <div class="navbar-collapse collapse navbar-warning-collapse">
                 <ul class="nav navbar-nav">
-                  <li>
+                  <li id="repair_orders">
                     <%= link_to t('repair_orders'), repair_orders_path %>
                   </li>
-                  <li>
+                  <li id="clients">
                     <%= link_to t('clients'), clients_path %>
                   </li>
-                  <li>
+                  <li id="cars">
                     <%= link_to t('cars'), cars_path %>
                   </li>
-                  <li>
+                  <li id="manuals">
                     <%= link_to t('manuals'), manuals_path %>
                   </li>
-                  <li>
+                  <li id="mechanics">
                     <%= link_to t('mechanics'), mechanics_path %>
                   </li>
-                  <li>
+                  <li id="technical_reports">
                     <%= link_to t('technical_reports'), technical_reports_path %>
                   </li>
-                  <li>
+                  <li id="cities">
                     <%= link_to t('cities'), cities_path %>
                   </li>
-                  <li>
+                  <li id="states">
                     <%= link_to t('states'), states_path %>
                   </li>
-                  <li>
+                  <li id="countries">
                     <%= link_to t('countries'), countries_path %>
                   </li>
                 </ul>
@@ -87,6 +87,7 @@
     <script>
         $(function() {
             $.material.init();
+            $('#<%= controller_name %>').addClass("active")
         });
     </script>
   </body>

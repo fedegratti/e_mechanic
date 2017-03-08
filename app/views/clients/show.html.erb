@@ -7,7 +7,7 @@
 
 <div class="col-lg-4">
 
-  <h1><%= t('information_of') %> <%= @client.name %></h1>
+  <h2><%= t('information_of') %> <%= @client.name %></h2>
   <%= link_to t(:edit), edit_client_path(@client), class:"btn btn-primary" %>
   <%= link_to t(:back), clients_path, class:"btn btn-primary" %>
 
@@ -108,5 +108,5 @@
 
   <h1><%= t('client_cars') %></h1>
 
-  <%= render 'cars_table', cars: @client.cars %>
+  <%= render 'cars_table', cars: @client.cars.order('id DESC') %>
 </div>

@@ -15,6 +15,10 @@ class Car < ApplicationRecord
     @car.first
   end
 
+  def self.get_by_identification identification
+    self.where("chassis_number ilike ? or engine_number ilike ?", "%#{identification}%", "%#{identification}%")
+  end
+
   def name
     "#{self.brand} #{self.model} (Chasis: #{self.chassis_number.upcase})" #, Cliente: #{self.client.name})
   end
