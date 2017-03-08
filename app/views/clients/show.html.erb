@@ -1,6 +1,3 @@
-<div class="alert alert-dismissable alert-warning">
-  <%= t('under_development') %>
-</div>
 <% if notice %>
 <div class="alert alert-dismissable alert-success">
   <button type="button" class="close" data-dismiss="alert">×</button>
@@ -8,9 +5,12 @@
 </div>
 <% end %>
 
-<h1><%= t('information_of') %> <%= @client.name %></h1>
-
 <div class="col-lg-4">
+
+  <h1><%= t('information_of') %> <%= @client.name %></h1>
+  <%= link_to t(:edit), edit_client_path(@client), class:"btn btn-primary" %>
+  <%= link_to t(:back), clients_path, class:"btn btn-primary" %>
+
   <table class="table table-striped table-hover ">
     <tbody>
       <tr>
@@ -55,6 +55,14 @@
       </tr>
       <tr>
         <td>
+          <strong><%= t('mobile_phone') %></strong>
+        </td>
+        <td>
+          <%= @client.mobile_phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <strong><%=  t('email') %></strong>
         </td>
         <td>
@@ -95,8 +103,10 @@
       </tr>
     </tbody>
   </table>
+</div>
+<div class="col-lg-8">
 
-<%= link_to t(:edit), edit_client_path(@client), class:"btn btn-primary" %>
-<%= link_to t(:back), clients_path, class:"btn btn-primary" %>
+  <h1><%= t('client_cars') %></h1>
 
+  <%= render 'cars_table', cars: @client.cars %>
 </div>

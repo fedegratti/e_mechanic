@@ -1,0 +1,35 @@
+<table id="clients_table" class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th><%= t('first_name') %></th>
+      <th><%= t('last_name') %></th>
+      <th><%= t('type') %></th>
+      <th><%= t('ci/ruc') %></th>
+      <th><%= t('email') %></th>
+      <th><%= t('telephone') %></th>
+      <th><%= t('mobile_phone') %></th>
+      <th><%= t('address') %></th>
+      <th><%= t('city') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% clients.each do |client| %>
+      <tr>
+        <td><%= client.first_name %></td>
+        <td><%= client.last_name %></td>
+        <td><%= !client.client_type.nil? ? t(client.client_type.downcase) : '' %></td>
+        <td><%= client.identification %></td>
+        <td><%= client.email %></td>
+        <td><%= client.telephone %></td>
+        <td><%= client.mobile_phone %></td>
+        <td><%= client.address %></td>
+        <td><%= client.city.name %></td>
+        <td><%= link_to t('show'), client_path(client) %></td>
+        <td><%= link_to t('edit'), edit_client_path(client) %></td>
+        <td><%= link_to t('destroy'), client_path(client), method: :delete, data: { confirm: t('are_you_sure?') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
