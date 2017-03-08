@@ -11,8 +11,7 @@ class Client < ApplicationRecord
     @client.first
   end
 
-  def self.get_by_name first_name, last_name
-    @client = self.where("first_name ilike ? and last_name ilike ?", "%#{first_name}%", "%#{last_name}%")
-    @client.first
+  def self.get_by_name name
+    self.where("first_name ilike ? or last_name ilike ?", "%#{name}%", "%#{name}%")
   end
 end

@@ -69,6 +69,12 @@ class ClientsController < ApplicationController
     render json: @cis.map(&:identification)
   end
 
+  # GET /clients/get_by_name
+  def get_by_name
+    @clients = Client.get_by_name params[:client_name]
+    render :layout => false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
@@ -81,6 +87,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:city_id, :first_name, :last_name, :telephone, :address, :email, :identification, :client_type)
+      params.require(:client).permit(:city_id, :first_name, :last_name, :telephone, :mobile_phone, :address, :email, :identification, :client_type)
     end
 end

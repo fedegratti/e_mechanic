@@ -1,0 +1,28 @@
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th><%= t('activerecord.attributes.car.brand') %></th>
+      <th><%= t('activerecord.attributes.car.model') %></th>
+      <th><%= t('activerecord.attributes.car.chassis_number') %></th>
+      <th><%= t('activerecord.attributes.car.engine_number') %></th>
+      <th><%= t('activerecord.attributes.car.plate') %></th>
+      <th><%= t('activerecord.attributes.car.sell_date') %></th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% cars.each do |car| %>
+      <tr>
+        <td><%= car.brand %></td>
+        <td><%= car.model %></td>
+        <td><%= car.chassis_number %></td>
+        <td><%= car.engine_number %></td>
+        <td><%= car.plate %></td>
+
+        <td><%= car.sell_date %></td>
+        <td><%= link_to t('show'), car %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

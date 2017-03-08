@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   #get '/repair_orders/' => 'repair_orders#index'
   post '/get_repair_orders_by_chassis_number' => 'repair_orders#get_by_chassis_number'
   post '/get_repair_orders_by_client_identification' => 'repair_orders#get_by_identification'
+
+  post '/clients/get_by_name' => 'clients#get_by_name'
 end
