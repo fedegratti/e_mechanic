@@ -261,3 +261,7 @@ body {
     background-color: #009688;
     border-color: #009688;
 }
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0px 0px 4px #007cd2 !important;
+  outline-style:none !important;
+}

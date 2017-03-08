@@ -1,0 +1,93 @@
+/* line 5, C:/Users/Usuario/Documents/server/e_mechanic/app/assets/stylesheets/repair_orders.scss */
+#car_info {
+  padding-top: 6px;
+  font-size: 15px;
+}
+
+/* line 9, C:/Users/Usuario/Documents/server/e_mechanic/app/assets/stylesheets/repair_orders.scss */
+.search-car-toggle {
+  padding-top: 10px;
+  padding-left: 14px;
+  padding-right: 0px;
+}
+
+/* line 14, C:/Users/Usuario/Documents/server/e_mechanic/app/assets/stylesheets/repair_orders.scss */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  padding: 4px 0;
+  margin: 0 0 10px 25px;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+}
+
+/* line 43, C:/Users/Usuario/Documents/server/e_mechanic/app/assets/stylesheets/repair_orders.scss */
+.ui-menu-item > a.ui-corner-all {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #555555;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* line 54, C:/Users/Usuario/Documents/server/e_mechanic/app/assets/stylesheets/repair_orders.scss */
+.ui-state-hover, .ui-state-active {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0088cc;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  background-image: none;
+}
+
+/* line 63, C:/Users/Usuario/Documents/server/e_mechanic/app/assets/stylesheets/repair_orders.scss */
+.ui-helper-hidden-accessible {
+  display: none !important;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/* line 71, C:/Users/Usuario/Documents/server/e_mechanic/app/assets/stylesheets/repair_orders.scss */
+.glyphicon.glyphicon-refresh {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}

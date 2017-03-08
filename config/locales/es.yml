@@ -161,7 +161,7 @@ es:
   sep: "Septiembre"
   oct: "Octubre"
   nov: "Noviembre"
-  dic: "Diciembre"
+  dec: "Diciembre"
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "Siguiente &#8594;"
