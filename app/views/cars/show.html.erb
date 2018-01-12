@@ -76,5 +76,5 @@
 
   <h1><%= t('car_repair_orders') %></h1>
 
-  <%= render 'repair_orders_table', repair_orders: @car.repair_orders.order('id DESC') %>
+  <%= render 'repair_orders_table', repair_orders: @car.repair_orders.order('order_number DESC') %>
 </div>
