@@ -36,7 +36,6 @@ group :production do
   gem 'pg'
 end
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -68,3 +67,6 @@ gem 'figaro'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'seed_dump'
+gem 'aws-sdk-s3'
+gem 'whenever', :require => false
