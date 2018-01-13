@@ -9,6 +9,9 @@ namespace :emechanic do
     #ENV['AWS_ACCESS_KEY_ID'] = 'AWS_ACCESS_KEY_ID'
     #ENV['AWS_SECRET_ACCESS_KEY'] = 'AWS_SECRET_ACCESS_KEY'
 
+    Aws.config[:ssl_ca_bundle] = 'ca-bundle.crt'
+    Aws.use_bundled_cert!
+
     s3 = Aws::S3::Resource.new(region:'sa-east-1')
     obj = s3.bucket('cloudtag.io').object('db_guille')
     obj.upload_file('db/backup.rb')
