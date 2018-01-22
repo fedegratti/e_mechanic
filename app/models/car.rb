@@ -16,7 +16,8 @@ class Car < ApplicationRecord
   end
 
   def self.get_by_identification identification
-    self.where("chassis_number ilike ? or engine_number ilike ?", "%#{identification}%", "%#{identification}%")
+    self.where("chassis_number ilike ? or engine_number ilike ? or plate ilike ?",
+     "%#{identification}%", "%#{identification}%", "%#{identification}%")
   end
 
   def name
