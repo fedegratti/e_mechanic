@@ -27,10 +27,10 @@
         [
           [t('service'), "Service"],
           [t('repair'), "Repair"],
-          [t('campaign'), "Campaign"]
+          [t('campaign'), "Campaign"],
+          [t('warranty'), "Warranty"]
         ], 3
       ) %>
-      <% # [t('warranty'), "Warranty"], %>
 
       <div id="order_type_select" class="form-group">
         <%= f.label t(:type), class: "col-sm-2 control-label" %>
@@ -272,7 +272,7 @@
     }
   }
   function toggleSelect (selectEl) {
-    if ($(selectEl).val() == "Campaign") {
+    if ($(selectEl).val() == "Campaign" || $(selectEl).val() == "Warranty") {
       $('#compliance_date_el').css('display', 'block');
       $('#repair_date_el').css('display', 'none');
       $('#description_el').css('display', 'none');
