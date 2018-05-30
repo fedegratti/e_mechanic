@@ -25,7 +25,7 @@
         <td><%= client.telephone %></td>
         <td><%= client.mobile_phone %></td>
         <td><%= client.address %></td>
-        <td><%= client.city.name %></td>
+        <td><%= client.city&.name %></td>
         <td><%= link_to t('show'), client_path(client) %></td>
         <td><%= link_to t('edit'), edit_client_path(client) %></td>
         <td><%= link_to t('destroy'), client_path(client), method: :delete, data: { confirm: t('are_you_sure?') } %></td>
