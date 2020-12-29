@@ -279,7 +279,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .togglebutton label input[type=checkbox]:checked + .toggle, .togglebutton-default label input[type=checkbox]:checked + .toggle {
-    background-color: #0f9d5880!important;
+    background-color: rgba(15, 157, 88, 0.5)!important;
 }
 
 .navbar .navbar-nav > li > a {
