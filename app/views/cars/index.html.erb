@@ -8,13 +8,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="form-horizontal">
-      <div class="col-lg-4">
+      <div class="col-lg-5 no-padding">
         <div class="well bs-component">
           <div class="form-group">
-            <label class="col-lg-4 control-label" for="car_identification"><%= t('search_car') %></label>
+            <label class="col-lg-3 control-label" for="car_identification"><%= t('search_car') %></label>
 
-            <div class="col-lg-7">
-              <input class="form-control ui-autocomplete-input" type="text" id="car_identification" autocomplete="off">
+            <div class="col-lg-9">
+              <input class="form-control ui-autocomplete-input" type="text" id="car_identification" autocomplete="off" placeholder="<%= t('search_car_placeholder') %>">
             </div>
 
           </div>
@@ -28,9 +28,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-6">
       <%= link_to t('new_car'), new_car_path, class:"btn btn-primary" %>
-    </div>
   </div>
 </div>
 
@@ -47,8 +45,17 @@
       getCars('/cars/get_by_identification','car_identification='+$(this).val());
     });
   });
+
+  var current_timeout = undefined;
+
   function getCars(url,data)
   {
-    $.post(url,data,function(data){$('#cars_table').html(data)});
+    clearTimeout(current_timeout);
+
+    current_timeout = setTimeout(function(){
+      $.post(url,data,function(data){$('#cars_table').html(data)});
+      console.log(data)
+    }, 700);
+
   }
 </script>

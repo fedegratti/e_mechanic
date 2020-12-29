@@ -64,7 +64,7 @@ class CarsController < ApplicationController
 
   # GET /get_car_by_chassis_number/1
   def get_by_chassis_number
-    @car = Car.where("chassis_number = ?", "#{params[:chassis_number]}")
+    @car = Car.order('chassis_number DESC').where("chassis_number = ?", "#{params[:chassis_number]}").limit(10)
     render json: @car
   end
 
@@ -86,7 +86,7 @@ class CarsController < ApplicationController
 
   # GET /get_chassis_numbers/1
   def get_chassis_numbers
-    @chassis_numbers = Car.order(:chassis_number).where("chassis_number ilike ?", "%#{params[:term]}%")
+    @chassis_numbers = Car.order('updated_at DESC').where("chassis_number ilike ?", "%#{params[:term]}%").limit(10)
     render json: @chassis_numbers.map(&:chassis_number)
   end
 

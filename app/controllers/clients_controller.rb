@@ -63,11 +63,11 @@ class ClientsController < ApplicationController
     end
   end
 
-  # GET /get_cis/1
-  def get_cis
-    @cis = Client.order(:identification).where("identification ilike ?", "%#{params[:term]}%")
-    render json: @cis.map(&:identification)
-  end
+  # # GET /get_cis/1
+  # def get_cis
+  #   @cis = Client.order(:identification).where("identification ilike ?", "%#{params[:term]}%")
+  #   render json: @cis.map(&:identification)
+  # end
 
   # GET /clients/get_by_name
   def get_by_name

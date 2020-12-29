@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GuillermoFielitz</title>
+    <title>Guillermo Fielitz</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -12,6 +12,7 @@
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
   </head>
 
   <body>
@@ -22,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/" style="padding-top: 8px;"><img src="/assets/logo.png" style="width: 205px;"></a>
+                <a class="navbar-brand" href="/" style="padding-top: 12px; padding-left: 10px;"><img src="/assets/logo.png" style="width: 170px;"></a>
                 <div class="app_version hidden">v0.1.0</div>
             </div>
             <div class="navbar-collapse collapse navbar-warning-collapse">
@@ -59,7 +60,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                     <% #if current_user != nil %>
-                        <h3 class="user_name"><%= t('hello') %> Guille</h3>
+                        <h3 class="user_name"><%= t('hello') %></h3>
                     <% #end %>
 
                     </li>

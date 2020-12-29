@@ -8,22 +8,22 @@
 
   <div class="row">
     <div class="form-horizontal">
-      <div class="col-lg-6">
+      <div class="col-lg-6 no-padding">
         <div class="well bs-component">
           <div class="form-group">
-            <label class="col-lg-2 control-label" for="repair_order_Buscar auto"><%= t('search_order') %></label>
-            <div class="col-lg-3 search-car-toggle">
+            <label class="col-lg-2 control-label repair-order__search-title" for="repair_order_Buscar auto"><%= t('search_order') %></label>
+            <div class="col-lg-3 search-car-toggle repair-order__search-toggle">
               <div class="togglebutton">
                 <label>
-                  <%= t('by_ci') %> &nbsp; &nbsp;<input id="toggle_button" onclick="changeSearchType(this);" type="checkbox" checked=""> <%= t('by_chassis_number') %>
+                  <%= t('by_order_number') %> &nbsp; &nbsp;<input id="toggle_button" onclick="changeSearchType(this);" type="checkbox" checked=""> <%= t('by_chassis_number') %>
                 </label>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4 repair-order__search-input">
               <input class="form-control ui-autocomplete-input" data-autocomplete-source="/chassis_numbers" type="text" name="repair_order[car_chassis_number]" id="repair_order_car_chassis_number" autocomplete="off" value="<%= @chassis_number %>">
-              <input class="form-control hidden ui-autocomplete-input" data-autocomplete-source="/cis" type="text" name="repair_order[ci_number]" id="repair_order_ci_number" autocomplete="off" value="<%= @ci_number %>">
+              <input class="form-control hidden ui-autocomplete-input" data-autocomplete-source="/repair_order_numbers" type="text" name="repair_order[repair_order_number]" id="repair_order_ci_number" autocomplete="off" value="<%= @repair_order_number %>">
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 repair-order__search-import">
               <div class="btn-group btn-group-justified btn-group-raised">
                 <a class="btn btn-primary" id="import_btn" onClick="importFromAyax()" disabled="true" title="<%= t('import_data_from_ayax') %>">
                   <%= t('import') %>
@@ -44,9 +44,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-6">
-      <%= link_to t('new_repair_order'), new_repair_order_path, class:"btn btn-primary" %>
-    </div>
+    <%= link_to t('new_repair_order'), new_repair_order_path, class:"btn btn-primary" %>
   </div>
 </div>
 
@@ -82,19 +80,27 @@
       $('#fail_icon').css('display','none');
     }
 
-  })
+  });
+
   $('#repair_order_ci_number').on('change input autocompleteselect',function(event, ui){
     if (ui)
-      getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ui.item.value,false);
+      getRepairOrders('/get_repair_orders_by_order_number/','order_number='+ui.item.value,false);
     else if ($(this).val().length > 0)
-      getRepairOrders('/get_repair_orders_by_client_identification/','identification='+$(this).val(),false);
-  })
+      getRepairOrders('/get_repair_orders_by_order_number/','order_number='+$(this).val(),false);
+  });
+
+  var current_timeout = undefined;
 
   function getRepairOrders(url,data,canImport)
   {
+    clearTimeout(current_timeout);
+
     if (canImport)
       $('#import_btn').attr('disabled',false);
-    $.post(url,data,function(data){$('#repair_orders_table').html(data)});
+
+    current_timeout = setTimeout(function(){
+      $.post(url,data,function(data){$('#repair_orders_table').html(data)});
+    }, 700);
   }
 
   function changeSearchType(elem) {
@@ -112,7 +118,7 @@
     {
       ci_number_el = $('#repair_order_ci_number');
       if (ci_number_el.val().length > 0)
-        getRepairOrders('/get_repair_orders_by_client_identification/','identification='+ci_number_el.val(),false);
+        getRepairOrders('/get_repair_orders_by_order_number/','order_number='+ci_number_el.val(),false);
     }
   }
 

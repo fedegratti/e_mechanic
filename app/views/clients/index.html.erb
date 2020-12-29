@@ -8,13 +8,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="form-horizontal">
-      <div class="col-lg-4">
+      <div class="col-lg-5 no-padding">
         <div class="well bs-component">
           <div class="form-group">
-            <label class="col-lg-4 control-label" for="client_name"><%= t('search_client') %></label>
+            <label class="col-lg-3 control-label" for="client_name"><%= t('search_client') %></label>
 
-            <div class="col-lg-7">
-              <input class="form-control ui-autocomplete-input" type="text" id="client_name" autocomplete="off">
+            <div class="col-lg-9">
+              <input class="form-control ui-autocomplete-input" type="text" id="client_name" autocomplete="off" placeholder="<%= t('search_client_placeholder') %>">
             </div>
 
           </div>
@@ -28,9 +28,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-6">
-      <%= link_to t('new_client'), new_client_path, class:"btn btn-primary" %>
-    </div>
+    <%= link_to t('new_client'), new_client_path, class:"btn btn-primary" %>
   </div>
 </div>
 
@@ -47,8 +45,16 @@
       getClients('/clients/get_by_name','client_name='+$(this).val());
     });
   });
+
+  var current_timeout = undefined;
+
   function getClients(url,data)
   {
-    $.post(url,data,function(data){$('#clients_table').html(data)});
+    clearTimeout(current_timeout);
+
+    current_timeout = setTimeout(function(){
+      console.log(data)
+      $.post(url,data,function(data){$('#clients_table').html(data)});
+    }, 700);
   }
 </script>

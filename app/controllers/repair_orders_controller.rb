@@ -154,7 +154,7 @@ class RepairOrdersController < ApplicationController
   def index
     @repair_orders = RepairOrder.paginate(:page => params[:page], :per_page => 10).order('order_number DESC')
     @chassis_number = params[:chassis_number] unless params[:chassis_number].nil?
-    @ci_number = params[:ci_number] unless params[:ci_number].nil?
+    @repair_order_number = params[:repair_order_number] unless params[:repair_order_number].nil?
     #@chassis_numbers = Car.all.pluck(:chassis_number)
   end
 
@@ -268,17 +268,29 @@ class RepairOrdersController < ApplicationController
     end
   end
 
+  # GET /get_numbers/1
+  def get_numbers
+    @order_numbers = RepairOrder.select(:order_number).order('order_number DESC').where("CAST(order_number AS TEXT) ilike ?", "%#{params[:term]}%").limit(10)
+    render json: @order_numbers.map{|repair_order| repair_order.order_number.to_s }
+  end
+
   # GET /get_repair_orders_by_chassis_number/1
   def get_by_chassis_number
     @repair_orders = RepairOrder.get_by_chassis_number params[:chassis_number]
     render :layout => false
   end
 
-  # GET /get_repair_orders_by_client_identification/1
-  def get_by_identification
-    @repair_orders = RepairOrder.get_by_identification params[:identification]
+  # GET /get_repair_orders_by_order_number/1
+  def get_by_order_number
+    @repair_orders = RepairOrder.get_many_by_order_number params[:order_number]
     render :layout => false
   end
+
+  # GET /get_repair_orders_by_client_identification/1
+  # def get_by_identification
+  #   @repair_orders = RepairOrder.get_by_identification params[:identification]
+  #   render :layout => false
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

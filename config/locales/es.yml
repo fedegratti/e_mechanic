@@ -5,7 +5,8 @@ es:
   back: "Volver"
   brand: "Marca"
   by_ci: "Por CI"
-  by_chassis_number: "Por chasis"
+  by_order_number: "Nro de orden"
+  by_chassis_number: "Chasis"
   campaign: "Campaña"
   car_repair_orders: "Órdenes de reparación del Auto"
   cars: "Autos"
@@ -36,7 +37,7 @@ es:
   email: "Email"
   engine_number: "Número de motor"
   first_name: "Nombre"
-  hello: 'Hola'
+  hello: 'Buen día!'
   in_ayax: "Está en ayax?"
   import: "Importar"
   import_data_from_ayax: "Importar datos desde AYAX"
@@ -72,7 +73,9 @@ es:
   repair_type: "Tipo de Reparación"
   search: "Buscar"
   search_car: "Buscar auto"
+  search_car_placeholder: "Por Nro de chasis, Nro de motor, o Matrícula"
   search_client: "Buscar cliente"
+  search_client_placeholder: "Por Nombre o Apellido"
   search_order: "Buscar orden"
   sell_date: "Fecha de venta"
   service: "Mantenimiento"
