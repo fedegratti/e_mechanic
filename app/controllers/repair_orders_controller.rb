@@ -152,7 +152,7 @@ class RepairOrdersController < ApplicationController
   # GET /repair_orders
   # GET /repair_orders.json
   def index
-    @repair_orders = RepairOrder.paginate(:page => params[:page], :per_page => 10).order('order_number DESC')
+    @repair_orders = RepairOrder.paginate(:page => params[:page], :per_page => 10).order('updated_at DESC')
     @chassis_number = params[:chassis_number] unless params[:chassis_number].nil?
     @repair_order_number = params[:repair_order_number] unless params[:repair_order_number].nil?
     #@chassis_numbers = Car.all.pluck(:chassis_number)
