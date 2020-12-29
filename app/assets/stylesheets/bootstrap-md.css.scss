@@ -7,6 +7,9 @@ body {
 #banner {
     border-bottom: none
 }
+.page-header {
+    margin: 0;
+}
 .page-header h1 {
     font-size: 4em
 }
@@ -184,4 +187,18 @@ footer p {
 .icon-preview:hover span {
     display: block;
     cursor: text;
+}
+
+// APP
+
+.new__title {
+    margin-left: 5px;
+}
+
+.btn.new__back-button {
+    margin-top: 20px;
+}
+
+.row {
+    margin: 0;
 }

@@ -251,17 +251,45 @@ body {
 
 .pagination > li > a,
 .pagination > li > span {
-    color: #009688;
+    color: #0f9d58;
 }
 
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus,
 .pagination > .active > span,
 .pagination > .active > span:hover,
 .pagination > .active > span:focus {
-    background-color: #009688;
-    border-color: #009688;
+    background-color: #0f9d58;
+    border-color: #0f9d58;
 }
 input:focus, select:focus, textarea:focus {
   box-shadow: 0px 0px 4px #007cd2 !important;
   outline-style:none !important;
+}
+
+.navbar.navbar, .navbar-default.navbar {
+    background-color: #0f9d58 !important;
+}
+
+.btn-primary:not(.btn-link):not(.btn-flat) {
+    background-color: #0f9d58 !important;
+}
+
+.togglebutton label input[type=checkbox]:checked + .toggle:after, .togglebutton-default label input[type=checkbox]:checked + .toggle:after {
+    background-color: #0f9d58 !important;
+}
+
+.togglebutton label input[type=checkbox]:checked + .toggle, .togglebutton-default label input[type=checkbox]:checked + .toggle {
+    background-color: rgb(15 157 88 / 0.5)!important;
+}
+
+.navbar .navbar-nav > li > a {
+    font-size: 14px;
+}
+
+a, a:hover, a:focus {
+    /* color: #0f9d58!important; */
+}
+
+.no-padding {
+    padding: 0;
 }

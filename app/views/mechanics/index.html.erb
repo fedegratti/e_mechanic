@@ -10,6 +10,10 @@
     <h1 id="tables"><%= t('mechanics') %></h1>
   </div>
 
+  <div class="row">
+    <%= link_to t('new_mechanic'), new_mechanic_path, class:"btn btn-primary" %>
+  </div>
+
   <div class="bs-component">
     <table class="table table-striped table-hover ">
 
@@ -46,4 +50,4 @@
   </div>
 </div>
 
-<%= link_to t('new_mechanic'), new_mechanic_path, class:"btn btn-primary" %>
+

@@ -73,3 +73,25 @@
     -moz-animation:spin 4s linear infinite;
     animation:spin 4s linear infinite;
 }
+
+.repair-order {}
+
+  .repair-order__search-title {
+    padding: 0;
+    width: auto;
+    padding-left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .repair-order__search-toggle {
+      width: auto;
+  }
+
+  .repair-order__search-input {
+
+  }
+
+  .repair-order__search-import {
+
+  }
