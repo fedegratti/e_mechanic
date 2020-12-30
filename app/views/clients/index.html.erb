@@ -16,7 +16,6 @@
             <div class="col-lg-9">
               <input class="form-control ui-autocomplete-input" type="text" id="client_name" autocomplete="off" placeholder="<%= t('search_client_placeholder') %>">
             </div>
-
           </div>
         </div>
       </div>
@@ -35,7 +34,9 @@
 <div class="col-lg-12">
   <div class="bs-component">
     <%= render 'clients_table', clients: @clients %>
-    <%= will_paginate @clients, renderer: BootstrapPagination::Rails %>
+    <div class='pagination'>
+      <%= will_paginate @clients, renderer: BootstrapPagination::Rails %>
+    </div>
   </div>
 </div>
 
@@ -53,8 +54,16 @@
     clearTimeout(current_timeout);
 
     current_timeout = setTimeout(function(){
-      console.log(data)
-      $.post(url,data,function(data){$('#clients_table').html(data)});
+      if ($('#client_name').val().length > 0)
+      {
+        $('.pagination').addClass('hidden');
+
+        $.post(url,data,function(data){
+          $('#clients_table').html(data);
+        });
+      } else {
+        window.location.search = '?page=1';
+      }
     }, 700);
   }
 </script>

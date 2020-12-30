@@ -80,6 +80,10 @@
       $('#fail_icon').css('display','none');
     }
 
+    if ($(this).val().length === 0) {
+      window.location.search = '?page=1';
+    }
+
   });
 
   $('#repair_order_ci_number').on('change input autocompleteselect',function(event, ui){
@@ -87,6 +91,10 @@
       getRepairOrders('/get_repair_orders_by_order_number/','order_number='+ui.item.value,false);
     else if ($(this).val().length > 0)
       getRepairOrders('/get_repair_orders_by_order_number/','order_number='+$(this).val(),false);
+
+    if ($(this).val().length === 0) {
+      window.location.search = '?page=1';
+    }
   });
 
   var current_timeout = undefined;

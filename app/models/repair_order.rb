@@ -32,7 +32,7 @@ class RepairOrder < ApplicationRecord
   end
 
   def self.get_many_by_order_number order_number
-    repair_orders = self.where("CAST(order_number AS TEXT) ilike ?", "%#{order_number}%").order('order_number DESC')
+    repair_orders = self.where("CAST(order_number AS TEXT) ilike ?", "%#{order_number}%").order('order_number DESC').limit(40)
     repair_orders = [] unless !repair_orders.nil?
     repair_orders
   end

@@ -35,7 +35,9 @@
 <div class="col-lg-12">
   <div class="bs-component">
     <%= render 'cars_table', cars: @cars %>
-    <%= will_paginate @cars, renderer: BootstrapPagination::Rails %>
+    <div class='pagination'>
+      <%= will_paginate @cars, renderer: BootstrapPagination::Rails %>
+    </div>
   </div>
 </div>
 
@@ -53,8 +55,16 @@
     clearTimeout(current_timeout);
 
     current_timeout = setTimeout(function(){
-      $.post(url,data,function(data){$('#cars_table').html(data)});
-      console.log(data)
+      if ($('#car_identification').val().length > 0)
+      {
+        $('.pagination').addClass('hidden');
+
+        $.post(url,data,function(data){
+          $('#cars_table').html(data);
+        });
+      } else {
+        window.location.search = '?page=1';
+      }
     }, 700);
 
   }

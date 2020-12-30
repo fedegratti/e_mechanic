@@ -12,6 +12,6 @@ class Client < ApplicationRecord
   end
 
   def self.get_by_name name
-    self.where("first_name ilike ? or last_name ilike ?", "%#{name}%", "%#{name}%")
+    self.where("first_name ilike ? or last_name ilike ?", "%#{name}%", "%#{name}%").order('updated_at DESC').limit(40)
   end
 end

@@ -17,7 +17,7 @@ class Car < ApplicationRecord
 
   def self.get_by_identification identification
     self.where("chassis_number ilike ? or engine_number ilike ? or plate ilike ?",
-     "%#{identification}%", "%#{identification}%", "%#{identification}%")
+     "%#{identification}%", "%#{identification}%", "%#{identification}%").order('updated_at DESC').limit(40)
   end
 
   def name
