@@ -70,3 +70,4 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'seed_dump'
 gem 'aws-sdk-s3'
 gem 'whenever', :require => false
+gem 'rails-i18n'
